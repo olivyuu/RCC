@@ -15,7 +15,7 @@ from tqdm import tqdm
 from skimage.transform import resize
 
 # ========== CONFIGURATION ==========
-RAW_DATA_DIR = "dev/data/raw/kits23/"
+RAW_DATA_DIR = "kits23/dataset/"
 PROCESSED_DATA_DIR = "dev/data/processed/kits23/"
 QC_DIR = "dev/data/qc/kits23/"
 TARGET_SHAPE = (224, 224, 64)  # Downsampled (H, W, Slices)
