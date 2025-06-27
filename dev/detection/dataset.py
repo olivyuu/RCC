@@ -63,15 +63,18 @@ class RCCPatchDataset(Dataset):
         self.transform = transform if transform else self.default_transform()
 
     def default_transform(self):
-        # Only basic augmentations (flip/rotation)
-        t_list = [transforms.ToTensor()]
+        # Always convert to tensor first, then augment if requested
         if self.augment:
             t_list = [
+                transforms.ToTensor(),
                 transforms.RandomHorizontalFlip(),
                 transforms.RandomVerticalFlip(),
                 transforms.RandomRotation(30),
             ]
+        else:
+            t_list = [transforms.ToTensor()]
         return transforms.Compose(t_list)
+
 
     def __len__(self):
         return len(self.images)
