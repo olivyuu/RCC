@@ -13,6 +13,7 @@ def plot_mask_overlay(image, mask, mask_name, outpath):
     plt.axis('off')
     plt.tight_layout()
     plt.savefig(outpath)
+    print(f"Saved: {outpath}")
     plt.close()
 
 def validate_preprocessing(processed_dir, qc_dir, max_cases=5, ensure_cyst=True):
@@ -33,7 +34,9 @@ def validate_preprocessing(processed_dir, qc_dir, max_cases=5, ensure_cyst=True)
             print(f"[WARN] Could not load {vol_file}: {e}. File may be corrupted, incomplete, or not a valid .npz. Consider deleting and reprocessing.")
             continue
 
-        mid = image.shape[2] // 2
+        # Fix mask: round and convert to uint8 (should have already been done in preprocessor, but just in case)
+        mask = np.round(mask).astype(np.uint8)
+
         case_id = vol_file.split('_')[0]
 
         # Print basic info for QC
@@ -41,19 +44,54 @@ def validate_preprocessing(processed_dir, qc_dir, max_cases=5, ensure_cyst=True)
         print(f"Image shape: {image.shape}, dtype: {image.dtype}, min/max: {image.min():.3f}/{image.max():.3f}")
         print(f"Mask shape: {mask.shape}, dtype: {mask.dtype}, mask labels: {np.unique(mask)}")
 
-        # Original image
-        plot_mask_overlay(image[:,:,mid], None, "Original", os.path.join(qc_dir, f"{case_id}_orig.png"))
-        # Kidney mask
-        plot_mask_overlay(image[:,:,mid], (mask[:,:,mid] == 1).astype(float), "Kidney", os.path.join(qc_dir, f"{case_id}_kidney.png"))
-        # Tumor mask
-        plot_mask_overlay(image[:,:,mid], (mask[:,:,mid] == 2).astype(float), "Tumor", os.path.join(qc_dir, f"{case_id}_tumor.png"))
-        # Cyst mask (only if present)
-        cyst_mask = (mask[:,:,mid] == 3)
-        if np.any(cyst_mask):
-            plot_mask_overlay(image[:,:,mid], cyst_mask.astype(float), "Cyst", os.path.join(qc_dir, f"{case_id}_cyst.png"))
+        # 1. Save a mid-slice with just original image (for reference)
+        mid = image.shape[2] // 2
+        out_orig = os.path.join(qc_dir, f"{case_id}_orig.png")
+        plot_mask_overlay(image[:,:,mid], None, "Original", out_orig)
+
+        # 2. Find a slice with kidney and tumor present, save that
+        kidney_slices = np.unique(np.argwhere(mask == 1)[:, 2])
+        tumor_slices = np.unique(np.argwhere(mask == 2)[:, 2])
+        common_slices = np.intersect1d(kidney_slices, tumor_slices)
+        slice_to_plot = None
+        if len(common_slices) > 0:
+            slice_to_plot = int(common_slices[0])
+            print(f"  [INFO] Slice {slice_to_plot}: kidney and tumor present.")
+        elif len(kidney_slices) > 0:
+            slice_to_plot = int(kidney_slices[0])
+            print(f"  [INFO] Slice {slice_to_plot}: kidney present, tumor not present.")
+        else:
+            slice_to_plot = mid
+            print("  [INFO] Defaulting to mid-slice.")
+
+        # Save kidney and tumor overlay for selected slice
+        out_kidney = os.path.join(qc_dir, f"{case_id}_kidney.png")
+        plot_mask_overlay(
+            image[:,:,slice_to_plot],
+            (mask[:,:,slice_to_plot] == 1).astype(float),
+            "Kidney", out_kidney
+        )
+        out_tumor = os.path.join(qc_dir, f"{case_id}_tumor.png")
+        plot_mask_overlay(
+            image[:,:,slice_to_plot],
+            (mask[:,:,slice_to_plot] == 2).astype(float),
+            "Tumor", out_tumor
+        )
+
+        # 3. If cyst present, find a slice with cyst and save it
+        cyst_slices = np.unique(np.argwhere(mask == 3)[:, 2])
+        if len(cyst_slices) > 0:
+            cyst_slice = int(cyst_slices[0])
+            out_cyst = os.path.join(qc_dir, f"{case_id}_cyst.png")
+            plot_mask_overlay(
+                image[:,:,cyst_slice],
+                (mask[:,:,cyst_slice] == 3).astype(float),
+                "Cyst", out_cyst
+            )
+            print(f"  [INFO] Cyst found in slice {cyst_slice}.")
             found_cyst = True
         else:
-            print(f"No cyst in mid-slice for {case_id}")
+            print(f"  No cyst present for {case_id}.")
 
         checked += 1
 
