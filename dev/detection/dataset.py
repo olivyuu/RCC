@@ -80,10 +80,9 @@ class RCCPatchDataset(Dataset):
         return len(self.images)
 
     def __getitem__(self, idx):
-        img = self.images[idx]
+        img = self.images[idx]  # shape [224, 224]
         label = self.labels[idx]
         meta = self.metas[idx]
-        img = np.expand_dims(img, axis=0)  # [1, H, W]
         img = img.astype(np.float32)
         img = self.transform(img)
         return img, label, meta
