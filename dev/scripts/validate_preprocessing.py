@@ -3,11 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 def plot_multiclass_overlay(image, mask, mask_names, outpath, colors, priorities):
-    """Overlay multiple binary masks in color on a grayscale image.
-    masks: list of (H, W) binary arrays
-    colors: list of RGBA or matplotlib color names (in overlay order)
-    priorities: order in which to draw masks (last drawn is top)
-    """
+    """Overlay multiple binary masks in color on a grayscale image."""
     plt.figure(figsize=(8, 8))
     plt.imshow(image, cmap='gray')
     overlayed = False
@@ -48,7 +44,8 @@ def validate_preprocessing(processed_dir, qc_dir, max_cases=5, ensure_cyst=True)
             continue
 
         mask = np.round(mask).astype(np.uint8)
-        case_id = vol_file.split('_')[0]
+        # Use the first two tokens for case_id: e.g. 'case_00123'
+        case_id = '_'.join(vol_file.split('_')[:2])
 
         print(f"\n=== QC for {case_id} ===")
         print(f"Image shape: {image.shape}, dtype: {image.dtype}, min/max: {image.min():.3f}/{image.max():.3f}")
