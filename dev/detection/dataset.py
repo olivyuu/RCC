@@ -70,7 +70,6 @@ class RCCPatchDataset(Dataset):
                 transforms.RandomHorizontalFlip(),
                 transforms.RandomVerticalFlip(),
                 transforms.RandomRotation(30),
-                transforms.ToTensor(),
             ]
         return transforms.Compose(t_list)
 
