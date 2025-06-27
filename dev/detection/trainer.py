@@ -1,5 +1,3 @@
-# dev/detection/trainer.py
-
 import os
 import torch
 import numpy as np
@@ -15,24 +13,49 @@ def train_detection(config, run_dir):
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     logfile = os.path.join(run_dir, 'train.log')
 
-    # Dataset
-    data_dir = config.get('data', {}).get('processed_dir', 'dev/data/processed/kits23/')
-    batch_size = config.get('batch_size', 32)
-    epochs = config.get('epochs', 50)
-    lr = config.get('lr', 1e-4)
-    split_seed = config.get('split_seed', 42)
-    split_frac = config.get('split_frac', 0.8)
-    augment = config.get('augment', True)
+    # --- Dataset config ---
+    data_conf = config.get('data', {})
+    data_dir = data_conf.get('processed_dir', 'dev/data/processed/kits23/')
+    batch_size = data_conf.get('batch_size', 32)
+    num_workers = data_conf.get('num_workers', 2)
+    split_seed = data_conf.get('split_seed', 42)
+    split_frac = data_conf.get('train_frac', 0.8)
+    augment = data_conf.get('augment', True)
 
+    # --- Training config ---
+    train_conf = config.get('train', {})
+    epochs = train_conf.get('epochs', 50)
+    lr = train_conf.get('lr', 1e-4)
+    weight_decay = train_conf.get('weight_decay', 0.0)
+    optimizer_name = train_conf.get('optimizer', 'adam').lower()
+    # Scheduler support (optional)
+    scheduler_type = train_conf.get('scheduler', 'step')
+    scheduler_step_size = train_conf.get('scheduler_step_size', 40)
+    scheduler_gamma = train_conf.get('scheduler_gamma', 0.5)
+
+    # --- Model config ---
+    model_conf = config.get('model', {})
+    arch = model_conf.get('arch', "densenet121")
+    pretrained = model_conf.get('pretrained', False)
+
+    # --- Datasets ---
     train_set = RCCPatchDataset(data_dir, split='train', split_seed=split_seed, split_frac=split_frac, augment=augment)
     val_set = RCCPatchDataset(data_dir, split='val', split_seed=split_seed, split_frac=split_frac, augment=False)
-    train_loader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=2)
-    val_loader = torch.utils.data.DataLoader(val_set, batch_size=batch_size, shuffle=False, num_workers=2)
+    train_loader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+    val_loader = torch.utils.data.DataLoader(val_set, batch_size=batch_size, shuffle=False, num_workers=num_workers)
 
-    # Model/optimizer
-    model = get_model(pretrained=False).to(device)
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    # --- Model ---
+    model = get_model(pretrained=pretrained).to(device)
+
+    # --- Optimizer and Loss ---
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
     criterion = torch.nn.BCEWithLogitsLoss()
+
+    # --- Scheduler ---
+    if scheduler_type == 'step':
+        scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=scheduler_step_size, gamma=scheduler_gamma)
+    else:
+        scheduler = None
 
     best_val_acc = 0.0
     best_epoch = -1
@@ -83,6 +106,10 @@ def train_detection(config, run_dir):
             best_model_path = os.path.join(run_dir, 'best_model.pt')
             torch.save({'model': model.state_dict(), 'config': config}, best_model_path)
             save_log(logfile, f"Best model updated (epoch {best_epoch}, val_acc {best_val_acc:.4f})")
+
+        # Step scheduler if present
+        if scheduler is not None:
+            scheduler.step()
 
     # Final summary
     save_log(logfile, f"Best epoch: {best_epoch} (val_acc {best_val_acc:.4f})")
