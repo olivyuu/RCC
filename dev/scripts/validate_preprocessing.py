@@ -25,11 +25,21 @@ def validate_preprocessing(processed_dir, qc_dir, max_cases=5, ensure_cyst=True)
         if checked >= max_cases and (not ensure_cyst or found_cyst):
             break
 
-        data = np.load(os.path.join(processed_dir, vol_file))
-        image = data['image']
-        mask = data['mask']
+        try:
+            data = np.load(os.path.join(processed_dir, vol_file))
+            image = data['image']
+            mask = data['mask']
+        except Exception as e:
+            print(f"[WARN] Could not load {vol_file}: {e}. File may be corrupted, incomplete, or not a valid .npz. Consider deleting and reprocessing.")
+            continue
+
         mid = image.shape[2] // 2
         case_id = vol_file.split('_')[0]
+
+        # Print basic info for QC
+        print(f"\n=== QC for {case_id} ===")
+        print(f"Image shape: {image.shape}, dtype: {image.dtype}, min/max: {image.min():.3f}/{image.max():.3f}")
+        print(f"Mask shape: {mask.shape}, dtype: {mask.dtype}, mask labels: {np.unique(mask)}")
 
         # Original image
         plot_mask_overlay(image[:,:,mid], None, "Original", os.path.join(qc_dir, f"{case_id}_orig.png"))
@@ -43,7 +53,6 @@ def validate_preprocessing(processed_dir, qc_dir, max_cases=5, ensure_cyst=True)
             plot_mask_overlay(image[:,:,mid], cyst_mask.astype(float), "Cyst", os.path.join(qc_dir, f"{case_id}_cyst.png"))
             found_cyst = True
         else:
-            # Optionally, skip or save a placeholder
             print(f"No cyst in mid-slice for {case_id}")
 
         checked += 1
@@ -59,4 +68,9 @@ if __name__ == "__main__":
     parser.add_argument('--max_cases', type=int, default=10)
     parser.add_argument('--ensure_cyst', action='store_true', help='Try to include at least one case with a cyst mask in QC')
     args = parser.parse_args()
-    validate_preprocessing(args.processed_dir, args.qc_dir, max_cases=args.max_cases, ensure_cyst=args.ensure_cyst)
+    validate_preprocessing(
+        args.processed_dir, 
+        args.qc_dir, 
+        max_cases=args.max_cases, 
+        ensure_cyst=args.ensure_cyst
+    )
