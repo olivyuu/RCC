@@ -2,181 +2,171 @@ import os
 import argparse
 import torch
 import numpy as np
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix, roc_curve
 import matplotlib.pyplot as plt
-import yaml
-from sklearn.metrics import (
-    accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, roc_curve, auc
-)
-
-from dev.detection.model import get_model  # assumes your get_model loads arch from config
+from dev.detection.model import get_model
 from dev.detection.dataset import RCCPatchDataset
 
-def plot_roc(y_true, y_score, out_path):
-    fpr, tpr, _ = roc_curve(y_true, y_score)
-    roc_auc = auc(fpr, tpr)
-    plt.figure()
-    plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (AUC = {roc_auc:.3f})')
-    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('ROC Curve')
-    plt.legend(loc="lower right")
-    plt.tight_layout()
-    plt.savefig(out_path)
-    plt.close()
-    return roc_auc
-
-def plot_confusion(y_true, y_pred, out_path):
-    cm = confusion_matrix(y_true, y_pred)
+def plot_patch_with_masks(img, mask, outpath, meta=None):
+    """Overlay kidney/tumor/cyst masks if present, else show grayscale image."""
     plt.figure(figsize=(4, 4))
-    plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
-    plt.title("Confusion Matrix")
-    plt.colorbar()
-    classes = ['Background', 'Lesion']
-    tick_marks = np.arange(len(classes))
-    plt.xticks(tick_marks, classes, rotation=45)
-    plt.yticks(tick_marks, classes)
-    thresh = cm.max() / 2.
-    for i, j in np.ndindex(cm.shape):
-        plt.text(j, i, f"{cm[i, j]}", horizontalalignment="center",
-                 color="white" if cm[i, j] > thresh else "black")
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')
-    plt.tight_layout()
-    plt.savefig(out_path)
-    plt.close()
-
-def overlay_mask(image, label, mask_color=(255,0,0), alpha=0.4):
-    """Overlay a red color if label==1, else just grayscale."""
-    img = np.stack([image]*3, axis=-1)
-    if label == 1:
-        # Overlay red
-        mask_rgb = np.zeros_like(img)
-        for c in range(3): mask_rgb[:,:,c] = mask_color[c]
-        img = img * (1-alpha) + mask_rgb * alpha
-        img = np.clip(img, 0, 1)
-    return img
-
-def save_patch_with_label(image, pred_prob, gt_label, out_path, title=None):
-    img_disp = image.squeeze()
-    overlay = overlay_mask(img_disp, gt_label, mask_color=(255,0,0), alpha=0.3)
-    plt.figure(figsize=(3, 3))
-    plt.imshow(overlay)
+    plt.imshow(img, cmap='gray')
+    legend_handles = []
+    mask_kidney = (mask == 1)
+    mask_tumor  = (mask == 2)
+    mask_cyst   = (mask == 3)
+    # Overlay each mask with different color (kidney=blue, tumor=red, cyst=orange)
+    if mask_kidney.any():
+        plt.imshow(np.ma.masked_where(mask_kidney == 0, mask_kidney), alpha=0.3, cmap="Blues")
+        legend_handles.append(plt.Rectangle((0,0),1,1, color=plt.get_cmap("Blues")(0.6)))
+    if mask_tumor.any():
+        plt.imshow(np.ma.masked_where(mask_tumor == 0, mask_tumor), alpha=0.3, cmap="Reds")
+        legend_handles.append(plt.Rectangle((0,0),1,1, color=plt.get_cmap("Reds")(0.6)))
+    if mask_cyst.any():
+        plt.imshow(np.ma.masked_where(mask_cyst == 0, mask_cyst), alpha=0.3, cmap="Oranges")
+        legend_handles.append(plt.Rectangle((0,0),1,1, color=plt.get_cmap("Oranges")(0.6)))
+    label_names = []
+    if mask_kidney.any(): label_names.append("Kidney")
+    if mask_tumor.any(): label_names.append("Tumor")
+    if mask_cyst.any():  label_names.append("Cyst")
+    if legend_handles:
+        plt.legend(legend_handles, label_names, fontsize=8, loc='lower right')
     plt.axis('off')
-    plt.title(title or f"GT: {gt_label} | Pred: {pred_prob:.2f}")
+    if meta:
+        plt.title(f"Slice {meta.get('slice', '?')}, Type: {meta.get('type', '?')}", fontsize=8)
     plt.tight_layout()
-    plt.savefig(out_path)
+    plt.savefig(outpath)
     plt.close()
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model_path', type=str, required=True, help='Path to best_model.pt')
-    parser.add_argument('--run_dir', type=str, required=True, help='Base directory for this run (for saving QC)')
-    parser.add_argument('--processed_dir', type=str, required=True, help='Processed patch dataset dir')
-    parser.add_argument('--split', type=str, default='val', help='Which split to use (val or test)')
-    parser.add_argument('--num_examples', type=int, default=8, help='How many confident/uncertain examples to save')
+    parser.add_argument('--model_path', type=str, required=True)
+    parser.add_argument('--run_dir', type=str, required=True)
+    parser.add_argument('--processed_dir', type=str, required=True)
+    parser.add_argument('--split', type=str, default='val')
+    parser.add_argument('--num_examples', type=int, default=10)
     args = parser.parse_args()
 
-    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    # Output QC dir
     qc_dir = os.path.join(args.run_dir, 'qc')
     os.makedirs(qc_dir, exist_ok=True)
 
-    # Load config
-    config_path = os.path.join(args.run_dir, 'config.yaml')
-    if not os.path.exists(config_path):
-        config_path = os.path.join(args.run_dir, 'detection.yaml')  # fallback
-    with open(config_path, 'r') as f:
-        config = yaml.safe_load(f)
-
-    # Load dataset
+    # ---- Load data ----
     print(f"Loading {args.split} dataset from {args.processed_dir} ...")
-    val_dataset = RCCPatchDataset(
-        args.processed_dir,
-        split=args.split,
-        split_seed=config['data']['split_seed'],
-        split_frac=config['data']['train_frac'],
-        augment=False
-    )
-    print(f"Loaded {len(val_dataset)} patches for evaluation.")
+    dataset = RCCPatchDataset(args.processed_dir, split=args.split, augment=False)
+    loader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=False)
 
-    # Load model
-    model = get_model(config['model'].get('pretrained', False))
+    # ---- Load model ----
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    model = get_model(pretrained=False).to(device)
     checkpoint = torch.load(args.model_path, map_location=device)
-    if isinstance(checkpoint, dict) and "model" in checkpoint:
-        state_dict = checkpoint["model"]
+    if 'model' in checkpoint:
+        model.load_state_dict(checkpoint['model'])
     else:
-        state_dict = checkpoint
-    model.load_state_dict(state_dict)
-    model = model.to(device)
+        model.load_state_dict(checkpoint)
     model.eval()
 
-    all_probs, all_labels, all_imgs, all_meta = [], [], [], []
-    batch_size = 64
-    loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=2)
+    # ---- Inference ----
+    all_preds = []
+    all_labels = []
+    all_meta = []
+    all_probs = []
+    all_imgs = []
+    all_masks = []
 
-    # Collect predictions
     with torch.no_grad():
-        for imgs, labels, metas in loader:
-            imgs = imgs.to(device)
-            logits = model(imgs)
-            probs = torch.sigmoid(logits).squeeze().cpu().numpy()
-            if len(probs.shape) > 1 and probs.shape[1] == 2:
-                probs = probs[:,1]
-            all_probs.append(probs)
-            all_labels.append(labels.numpy())
-            all_imgs.append(imgs.cpu().numpy())
+        for images, labels, metas in loader:
+            images = images.to(device)
+            logits = model(images).squeeze(1)
+            probs = torch.sigmoid(logits).cpu().numpy()
+            preds = (probs > 0.5).astype(int)
+            all_preds.extend(preds)
+            all_labels.extend(labels.numpy())
+            all_probs.extend(probs)
             all_meta.extend(metas)
+            # Also store images/masks for visualization
+            imgs_np = images.cpu().numpy()
+            for i in range(imgs_np.shape[0]):
+                # RCCPatchDataset guarantees 1 channel, HxW
+                img = imgs_np[i,0] if imgs_np[i].ndim == 3 else imgs_np[i]
+                all_imgs.append(img)
+            # Try to get mask from meta (store if possible)
+            if hasattr(dataset, 'masks'):
+                masks_np = dataset.masks
+                # This logic is correct if batches are not shuffled in loader
+                batch_indices = list(range(len(all_masks), len(all_masks) + len(labels)))
+                for i, idx in enumerate(batch_indices):
+                    if idx < len(masks_np):
+                        mask = masks_np[idx][:,:,0]
+                        all_masks.append(mask)
+                    else:
+                        all_masks.append(np.zeros_like(all_imgs[0]))  # fallback
+            else:
+                all_masks.extend([np.zeros_like(all_imgs[0])] * len(labels))
 
-    all_probs = np.concatenate(all_probs)
-    all_labels = np.concatenate(all_labels)
-    all_imgs = np.concatenate(all_imgs, axis=0)
-
-    # Compute metrics
-    y_pred = (all_probs > 0.5).astype(int)
-    acc = accuracy_score(all_labels, y_pred)
-    prec = precision_score(all_labels, y_pred)
-    rec = recall_score(all_labels, y_pred)
-    f1 = f1_score(all_labels, y_pred)
-    cm = confusion_matrix(all_labels, y_pred)
-    roc_auc = plot_roc(all_labels, all_probs, os.path.join(qc_dir, "roc_curve.png"))
-    plot_confusion(all_labels, y_pred, os.path.join(qc_dir, "confusion_matrix.png"))
-
-    metrics_str = (
-        f"Accuracy: {acc:.4f}\n"
-        f"Precision: {prec:.4f}\n"
-        f"Recall: {rec:.4f}\n"
-        f"F1: {f1:.4f}\n"
-        f"ROC-AUC: {roc_auc:.4f}\n"
-        f"Confusion matrix:\n{cm}\n"
-    )
+    all_preds = np.array(all_preds)
+    all_labels = np.array(all_labels)
+    all_probs = np.array(all_probs)
+    # ---- Metrics ----
+    acc = accuracy_score(all_labels, all_preds)
+    prec = precision_score(all_labels, all_preds)
+    rec = recall_score(all_labels, all_preds)
+    f1 = f1_score(all_labels, all_preds)
+    roc_auc = roc_auc_score(all_labels, all_probs)
+    cm = confusion_matrix(all_labels, all_preds)
+    metrics_str = (f"Accuracy: {acc:.4f}\n"
+                   f"Precision: {prec:.4f}\n"
+                   f"Recall: {rec:.4f}\n"
+                   f"F1: {f1:.4f}\n"
+                   f"ROC-AUC: {roc_auc:.4f}\n"
+                   f"Confusion matrix:\n{cm}")
     print(metrics_str)
-    with open(os.path.join(qc_dir, "metrics.txt"), 'w') as f:
+    with open(os.path.join(qc_dir, "metrics.txt"), "w") as f:
         f.write(metrics_str)
 
-    # Failure analysis: always stay in bounds
-    N = min(args.num_examples, len(all_probs))
-    idx_conf_pos = np.argsort(-all_probs)[:N]
-    idx_conf_neg = np.argsort(all_probs)[:N]
-    idx_uncertain = np.argsort(np.abs(all_probs - 0.5))[:N]
+    # ---- ROC Curve ----
+    fpr, tpr, _ = roc_curve(all_labels, all_probs)
+    plt.figure()
+    plt.plot(fpr, tpr, label=f"ROC (AUC={roc_auc:.2f})")
+    plt.xlabel("False Positive Rate")
+    plt.ylabel("True Positive Rate")
+    plt.legend()
+    plt.grid()
+    plt.tight_layout()
+    plt.savefig(os.path.join(qc_dir, "roc_curve.png"))
+    plt.close()
 
-    def save_examples(idxs, name):
-        for i, idx in enumerate(idxs):
-            img = all_imgs[idx].squeeze()
-            label = all_labels[idx]
-            prob = all_probs[idx]
-            save_patch_with_label(img, prob, label, os.path.join(qc_dir, f"{name}_{i}_label{label}_prob{prob:.2f}.png"),
-                                 title=f"{name}: prob={prob:.2f}, label={label}")
+    # ---- Confusion matrix ----
+    plt.figure()
+    plt.imshow(cm, cmap="Blues", interpolation='nearest')
+    plt.colorbar()
+    plt.title("Confusion Matrix")
+    plt.xlabel("Predicted label")
+    plt.ylabel("True label")
+    plt.tight_layout()
+    plt.savefig(os.path.join(qc_dir, "confusion_matrix.png"))
+    plt.close()
+
+    # ---- Example images ----
+    # Find highly confident and uncertain predictions
+    idx_conf_pos = np.argsort(-all_probs)[:args.num_examples]  # confident positive
+    idx_conf_neg = np.argsort(all_probs)[:args.num_examples]   # confident negative
+    idx_uncertain = np.argsort(np.abs(all_probs - 0.5))[:args.num_examples]  # closest to 0.5
+
+    def save_examples(indices, name):
+        for i, idx in enumerate(indices):
+            if idx >= len(all_imgs): continue
+            img = all_imgs[idx]
+            mask = all_masks[idx] if idx < len(all_masks) else np.zeros_like(img)
+            meta = all_meta[idx] if idx < len(all_meta) else {}
+            outpath = os.path.join(qc_dir, f"{name}_{i}_label{all_labels[idx]}_prob{all_probs[idx]:.2f}.png")
+            plot_patch_with_masks(img, mask, outpath, meta=meta)
 
     save_examples(idx_conf_pos, "confident_lesion")
-    save_examples(idx_conf_neg, "confident_bg")
+    save_examples(idx_conf_neg, "confident_nonlesion")
     save_examples(idx_uncertain, "uncertain")
 
-    fp_idxs = np.where((y_pred == 1) & (all_labels == 0))[0][:N]
-    fn_idxs = np.where((y_pred == 0) & (all_labels == 1))[0][:N]
-    save_examples(fp_idxs, "false_positive")
-    save_examples(fn_idxs, "false_negative")
-
-    print(f"QC/analysis images and metrics saved to: {qc_dir}")
+    print(f"Saved metrics, curves, and {args.num_examples*3} example patch images to {qc_dir}")
 
 if __name__ == "__main__":
     main()
