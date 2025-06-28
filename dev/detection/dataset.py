@@ -3,17 +3,16 @@
 import os
 import numpy as np
 import torch
-from torch.utils.data import Dataset, DataLoader, random_split
+from torch.utils.data import Dataset
 import random
-
 from torchvision import transforms
 
 class RCCPatchDataset(Dataset):
     """
-    Dataset for patch-based training for RCC tumor detection.
+    Dataset for patch-based training for RCC kidney lesion detection (tumor or cyst).
     Expects .npz files with arrays: patches, masks, meta (1 file per case).
     Returns (image, label, meta_dict) per patch.
-    Label: 1 = tumor-present, 0 = background.
+    Label: 1 = tumor or cyst present, 0 = background/empty/kidney.
     """
 
     def __init__(self, data_dir, split='train', split_seed=42, split_frac=0.8,
@@ -47,15 +46,18 @@ class RCCPatchDataset(Dataset):
         self.metas = []
         for pf in self.selected_files:
             data = np.load(os.path.join(data_dir, pf), allow_pickle=True)
-            patches = data['patches'] # (N, 224, 224, 1)
+            patches = data['patches']  # (N, 224, 224, 1)
             masks = data['masks']
             meta = data['meta']
-            # Label: tumor if any pixel in mask==2
-            labels = np.array([(mask[...,0] == 2).any() for mask in masks]).astype(np.int64)
+            # Label: 1 if patch contains tumor OR cyst; 0 otherwise
+            labels = np.array([
+                ((mask[...,0] == 2).any() or (mask[...,0] == 3).any())
+                for mask in masks
+            ]).astype(np.int64)
             self.images.extend([patch[...,0] for patch in patches])
             self.labels.extend(labels)
             self.metas.extend(meta)
-        self.images = np.stack(self.images) # (N, 224, 224)
+        self.images = np.stack(self.images)  # (N, 224, 224)
         self.labels = np.array(self.labels)
         self.metas = np.array(self.metas)
 
@@ -74,7 +76,6 @@ class RCCPatchDataset(Dataset):
         else:
             t_list = [transforms.ToTensor()]
         return transforms.Compose(t_list)
-
 
     def __len__(self):
         return len(self.images)
