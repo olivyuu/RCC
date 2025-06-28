@@ -94,8 +94,6 @@ class RCCPatchDataset(Dataset):
         mask = self.masks[idx]     # [H, W] (uint8, values: 0-bg, 1-kidney, 2-tumor, 3-cyst)
         label = self.labels[idx]
         meta = self.metas[idx]
-        img = np.expand_dims(img, axis=0)    # [1, H, W]
-        mask = np.expand_dims(mask, axis=0)  # [1, H, W]
         # Convert to PIL expects [H,W] or [C,H,W], uint8 or float32 in [0,1]
         img = img.astype(np.float32)
         if self.transform is not None:
