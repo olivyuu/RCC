@@ -1,83 +1,187 @@
-# dev/scripts/eval_detection.py
-
 import os
+import argparse
 import torch
-import yaml
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve
+import yaml
+from sklearn.metrics import (
+    accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, roc_curve, auc
+)
+from torchvision.utils import save_image
+
+from dev.detection.model import build_model  # assumes your build_model loads arch from config
 from dev.detection.dataset import RCCPatchDataset
-from dev.detection.model import get_model
 
-def load_config(cfg_path):
-    with open(cfg_path, "r") as f:
-        return yaml.safe_load(f)
+def plot_roc(y_true, y_score, out_path):
+    fpr, tpr, _ = roc_curve(y_true, y_score)
+    roc_auc = auc(fpr, tpr)
+    plt.figure()
+    plt.plot(fpr, tpr, color='darkorange', lw=2, label=f'ROC curve (AUC = {roc_auc:.3f})')
+    plt.plot([0, 1], [0, 1], color='navy', lw=2, linestyle='--')
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('ROC Curve')
+    plt.legend(loc="lower right")
+    plt.tight_layout()
+    plt.savefig(out_path)
+    plt.close()
+    return roc_auc
 
-def main(args):
-    # Load config/model/checkpoint
-    config = load_config(args.config)
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = get_model(pretrained=False).to(device)
-    checkpoint = torch.load(args.ckpt, map_location=device)
-    model.load_state_dict(checkpoint['model'])
+def plot_confusion(y_true, y_pred, out_path):
+    cm = confusion_matrix(y_true, y_pred)
+    plt.figure(figsize=(4, 4))
+    plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
+    plt.title("Confusion Matrix")
+    plt.colorbar()
+    classes = ['Background', 'Lesion']
+    tick_marks = np.arange(len(classes))
+    plt.xticks(tick_marks, classes, rotation=45)
+    plt.yticks(tick_marks, classes)
+    thresh = cm.max() / 2.
+    for i, j in np.ndindex(cm.shape):
+        plt.text(j, i, f"{cm[i, j]}", horizontalalignment="center",
+                 color="white" if cm[i, j] > thresh else "black")
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+    plt.tight_layout()
+    plt.savefig(out_path)
+    plt.close()
+
+def overlay_mask(image, mask, mask_color=(255,0,0), alpha=0.4):
+    """Overlay a binary mask on grayscale image (for QC visualization)."""
+    img = np.stack([image]*3, axis=-1)  # Grayscale to RGB
+    mask_rgb = np.zeros_like(img)
+    for c in range(3): mask_rgb[:,:,c] = mask_color[c]
+    mask_bool = (mask > 0)
+    img = img * (1-alpha) + mask_rgb * alpha * mask_bool[:,:,None]
+    img = np.clip(img, 0, 1)
+    return img
+
+def save_patch_with_mask(image, mask, pred_prob, gt_label, out_path, title=None):
+    img_disp = image.squeeze()
+    mask_disp = mask.squeeze()
+    overlay = overlay_mask(img_disp, mask_disp, mask_color=(255,0,0), alpha=0.4)
+    plt.figure(figsize=(3, 3))
+    plt.imshow(overlay)
+    plt.axis('off')
+    plt.title(title or f"GT: {gt_label} | Pred: {pred_prob:.2f}")
+    plt.tight_layout()
+    plt.savefig(out_path)
+    plt.close()
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--model_path', type=str, required=True, help='Path to best_model.pt')
+    parser.add_argument('--run_dir', type=str, required=True, help='Base directory for this run (for saving QC)')
+    parser.add_argument('--processed_dir', type=str, required=True, help='Processed patch dataset dir')
+    parser.add_argument('--split', type=str, default='val', help='Which split to use (val or test)')
+    parser.add_argument('--num_examples', type=int, default=8, help='How many confident/uncertain examples to save')
+    args = parser.parse_args()
+
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    qc_dir = os.path.join(args.run_dir, 'qc')
+    os.makedirs(qc_dir, exist_ok=True)
+
+    # Load config
+    config_path = os.path.join(args.run_dir, 'detection.yaml')
+    with open(config_path, 'r') as f:
+        config = yaml.safe_load(f)
+
+    # Load dataset
+    print(f"Loading {args.split} dataset from {args.processed_dir} ...")
+    val_dataset = RCCPatchDataset(
+        args.processed_dir,
+        split=args.split,
+        split_seed=config['data']['split_seed'],
+        split_frac=config['data']['train_frac'],
+        augment=False
+    )
+    print(f"Loaded {len(val_dataset)} patches for evaluation.")
+
+    # Load model
+    model = build_model(config['model'])
+    model.load_state_dict(torch.load(args.model_path, map_location=device))
+    model = model.to(device)
     model.eval()
 
-    dataset = RCCPatchDataset(config["data"]["processed_dir"], split='val', augment=False)
-    X = torch.tensor(dataset.images).float().unsqueeze(1).to(device) # (N, 1, H, W)
-    y = torch.tensor(dataset.labels).float().to(device)
-    metas = dataset.metas
+    all_probs, all_labels, all_imgs, all_masks, all_meta = [], [], [], [], []
+    batch_size = 64
+    loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=2)
 
+    # Collect predictions
     with torch.no_grad():
-        logits = model(X).squeeze(1)
-        probs = torch.sigmoid(logits)
-        preds = (probs > 0.5).long()
+        for imgs, labels, metas in loader:
+            imgs = imgs.to(device)  # [B,1,224,224]
+            logits = model(imgs)
+            probs = torch.sigmoid(logits).squeeze().cpu().numpy()
+            # If 2-class softmax, take class 1
+            if len(probs.shape) > 1 and probs.shape[1] == 2:
+                probs = probs[:,1]
+            all_probs.append(probs)
+            all_labels.append(labels.numpy())
+            # For visualization
+            all_imgs.append(imgs.cpu().numpy())
+            # Get mask (from meta dict, requires loading .npz file for each case/patch)
+            # We'll just get mask from meta for now
+            all_masks.extend([(meta['mask'] if isinstance(meta, dict) and 'mask' in meta else np.zeros((224,224))) for meta in metas])
+            all_meta.extend(metas)
 
-    # Metrics
-    acc = (preds == y.long()).float().mean().item()
-    print(f"Model: {args.ckpt}\nConfig: {args.config}")
-    print(f"Accuracy: {acc:.4f}")
+    all_probs = np.concatenate(all_probs)
+    all_labels = np.concatenate(all_labels)
+    all_imgs = np.concatenate(all_imgs, axis=0)
 
-    # Confusion Matrix and ROC
-    cm = confusion_matrix(y.cpu().numpy(), preds.cpu().numpy())
-    print(f"Confusion Matrix:\n{cm}")
-    auc = roc_auc_score(y.cpu().numpy(), probs.cpu().numpy())
-    print(f"ROC-AUC: {auc:.4f}")
+    # Compute metrics
+    y_pred = (all_probs > 0.5).astype(int)
+    acc = accuracy_score(all_labels, y_pred)
+    prec = precision_score(all_labels, y_pred)
+    rec = recall_score(all_labels, y_pred)
+    f1 = f1_score(all_labels, y_pred)
+    cm = confusion_matrix(all_labels, y_pred)
+    roc_auc = plot_roc(all_labels, all_probs, os.path.join(qc_dir, "roc_curve.png"))
+    plot_confusion(all_labels, y_pred, os.path.join(qc_dir, "confusion_matrix.png"))
 
-    # Output images: confident and uncertain
-    conf_thresh = 0.9
-    uncertain_thresh = 0.55  # Near 0.5
-    out_dir = args.out_dir
-    os.makedirs(out_dir, exist_ok=True)
-    confident_idxs = ((probs > conf_thresh) | (probs < 1-conf_thresh)).nonzero().flatten()
-    uncertain_idxs = ((probs > (1-uncertain_thresh)) & (probs < uncertain_thresh)).nonzero().flatten()
+    metrics_str = (
+        f"Accuracy: {acc:.4f}\n"
+        f"Precision: {prec:.4f}\n"
+        f"Recall: {rec:.4f}\n"
+        f"F1: {f1:.4f}\n"
+        f"ROC-AUC: {roc_auc:.4f}\n"
+        f"Confusion matrix:\n{cm}\n"
+    )
+    print(metrics_str)
+    with open(os.path.join(qc_dir, "metrics.txt"), 'w') as f:
+        f.write(metrics_str)
 
-    for idx in confident_idxs[:5]:
-        img = X[idx,0].cpu().numpy()
-        pred = preds[idx].item()
-        p = probs[idx].item()
-        label = y[idx].item()
-        plt.imshow(img, cmap='gray')
-        plt.title(f"Confident | P={p:.2f} | Pred={pred} | True={label}")
-        plt.axis('off')
-        plt.savefig(os.path.join(out_dir, f"confident_{idx}_P{p:.2f}_T{label}.png"))
-        plt.close()
+    # Failure analysis
+    idx_conf_pos = np.argsort(-all_probs)[:args.num_examples]
+    idx_conf_neg = np.argsort(all_probs)[:args.num_examples]
+    idx_uncertain = np.argsort(np.abs(all_probs - 0.5))[:args.num_examples]
 
-    for idx in uncertain_idxs[:5]:
-        img = X[idx,0].cpu().numpy()
-        pred = preds[idx].item()
-        p = probs[idx].item()
-        label = y[idx].item()
-        plt.imshow(img, cmap='gray')
-        plt.title(f"Uncertain | P={p:.2f} | Pred={pred} | True={label}")
-        plt.axis('off')
-        plt.savefig(os.path.join(out_dir, f"uncertain_{idx}_P{p:.2f}_T{label}.png"))
-        plt.close()
+    def save_examples(idxs, name):
+        for i, idx in enumerate(idxs):
+            img = all_imgs[idx].squeeze()
+            label = all_labels[idx]
+            prob = all_probs[idx]
+            meta = all_meta[idx]
+            # Overlay mask: only for positive (if available)
+            mask = np.zeros((224,224))
+            if isinstance(meta, dict) and 'mask' in meta:
+                mask = meta['mask']
+            elif hasattr(meta, 'get') and meta.get('mask') is not None:
+                mask = meta['mask']
+            save_patch_with_mask(img, mask, prob, label, os.path.join(qc_dir, f"{name}_{i}_label{label}_prob{prob:.2f}.png"),
+                                 title=f"{name}: prob={prob:.2f}, label={label}")
+    save_examples(idx_conf_pos, "confident_lesion")
+    save_examples(idx_conf_neg, "confident_bg")
+    save_examples(idx_uncertain, "uncertain")
+
+    # False positive/negatives
+    fp_idxs = np.where((y_pred == 1) & (all_labels == 0))[0][:args.num_examples]
+    fn_idxs = np.where((y_pred == 0) & (all_labels == 1))[0][:args.num_examples]
+    save_examples(fp_idxs, "false_positive")
+    save_examples(fn_idxs, "false_negative")
+
+    print(f"QC/analysis images and metrics saved to: {qc_dir}")
 
 if __name__ == "__main__":
-    import argparse
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--config', type=str, required=True)
-    parser.add_argument('--ckpt', type=str, required=True)
-    parser.add_argument('--out_dir', type=str, default='dev/runs/eval/')
-    args = parser.parse_args()
-    main(args)
+    main()
