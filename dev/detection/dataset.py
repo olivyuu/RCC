@@ -38,7 +38,7 @@ class RCCPatchDataset(Dataset):
                 t = m['type']
                 if t == 'lesion':
                     self.labels.append(1)
-                elif t in ['background-kidney', 'background-other']:
+                elif t in ['background-kidney', 'background-other', 'true_background']:
                     self.labels.append(0)
                 else:
                     raise ValueError(f"Unknown patch type in meta: {t}")
