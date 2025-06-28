@@ -65,7 +65,7 @@ def train_detection(config, run_dir):
         train_loss = []
         train_preds, train_labels = [], []
 
-        for images, labels, _ in train_loader:
+        for images, labels, _, _ in train_loader:
             images, labels = images.to(device), labels.float().to(device)
             optimizer.zero_grad()
             logits = model(images).squeeze(1)
