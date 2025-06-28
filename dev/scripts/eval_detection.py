@@ -32,8 +32,12 @@ def plot_patch_with_masks(img, mask, outpath, meta=None):
     if legend_handles:
         plt.legend(legend_handles, label_names, fontsize=8, loc='lower right')
     plt.axis('off')
-    if meta:
-        plt.title(f"Slice {meta.get('slice', '?')}, Type: {meta.get('type', '?')}", fontsize=8)
+    # Fix: robustly handle meta as dict or str
+    if meta is not None:
+        if isinstance(meta, dict):
+            plt.title(f"Slice {meta.get('slice', '?')}, Type: {meta.get('type', '?')}", fontsize=8)
+        else:
+            plt.title(str(meta), fontsize=8)
     plt.tight_layout()
     plt.savefig(outpath)
     plt.close()
@@ -93,7 +97,6 @@ def main():
             # Try to get mask from meta (store if possible)
             if hasattr(dataset, 'masks'):
                 masks_np = dataset.masks
-                # This logic is correct if batches are not shuffled in loader
                 batch_indices = list(range(len(all_masks), len(all_masks) + len(labels)))
                 for i, idx in enumerate(batch_indices):
                     if idx < len(masks_np):
@@ -148,10 +151,9 @@ def main():
     plt.close()
 
     # ---- Example images ----
-    # Find highly confident and uncertain predictions
-    idx_conf_pos = np.argsort(-all_probs)[:args.num_examples]  # confident positive
-    idx_conf_neg = np.argsort(all_probs)[:args.num_examples]   # confident negative
-    idx_uncertain = np.argsort(np.abs(all_probs - 0.5))[:args.num_examples]  # closest to 0.5
+    idx_conf_pos = np.argsort(-all_probs)[:args.num_examples]
+    idx_conf_neg = np.argsort(all_probs)[:args.num_examples]
+    idx_uncertain = np.argsort(np.abs(all_probs - 0.5))[:args.num_examples]
 
     def save_examples(indices, name):
         for i, idx in enumerate(indices):
