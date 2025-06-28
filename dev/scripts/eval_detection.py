@@ -83,7 +83,7 @@ def main():
     os.makedirs(qc_dir, exist_ok=True)
 
     # Load config
-    config_path = os.path.join(args.run_dir, 'detection.yaml')
+    config_path = os.path.join(args.run_dir, 'config.yaml')
     with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
 
