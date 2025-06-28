@@ -35,7 +35,7 @@ class RCCPatchDataset(Dataset):
             patches = data['patches'] # (N, 224, 224, 1)
             masks = data['masks']     # (N, 224, 224, 1)
             meta = data['meta']
-            labels = np.array([(mask[...,0] == 2 or mask[...,0] == 3).any() for mask in masks]).astype(np.int64)
+            labels = np.array([((mask[...,0] == 2) | (mask[...,0] == 3)).any() for mask in masks]).astype(np.int64)
             # label=1 if tumor or cyst, else 0
             self.images.extend([patch[...,0] for patch in patches])
             self.masks.extend([mask[...,0] for mask in masks])
