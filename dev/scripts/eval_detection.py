@@ -99,10 +99,17 @@ def main():
     print(f"Loaded {len(val_dataset)} patches for evaluation.")
 
     # Load model
-    model = get_model(config['model'])
-    model.load_state_dict(torch.load(args.model_path, map_location=device))
+    # Load model
+    model = get_model(config['model'].get('pretrained', False))
+    checkpoint = torch.load(args.model_path, map_location=device)
+    if isinstance(checkpoint, dict) and "model" in checkpoint:
+        state_dict = checkpoint["model"]
+    else:
+        state_dict = checkpoint
+    model.load_state_dict(state_dict)
     model = model.to(device)
     model.eval()
+
 
     all_probs, all_labels, all_imgs, all_masks, all_meta = [], [], [], [], []
     batch_size = 64
