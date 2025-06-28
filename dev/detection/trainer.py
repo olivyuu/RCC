@@ -65,7 +65,7 @@ def train_detection(config, run_dir):
         train_loss = []
         train_preds, train_labels = [], []
 
-        for images, labels, _, _ in train_loader:
+        for images, labels, _, metas in train_loader:
             images, labels = images.to(device), labels.float().to(device)
             optimizer.zero_grad()
             logits = model(images).squeeze(1)
@@ -83,7 +83,7 @@ def train_detection(config, run_dir):
         model.eval()
         val_loss, val_preds, val_labels = [], [], []
         with torch.no_grad():
-            for images, labels, _ in val_loader:
+            for images, labels, _, metas in val_loader:
                 images, labels = images.to(device), labels.float().to(device)
                 logits = model(images).squeeze(1)
                 loss = criterion(logits, labels)
