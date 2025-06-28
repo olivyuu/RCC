@@ -39,53 +39,48 @@ def normalize_img(img):
 def resize_volume(vol, target_shape, order=1):
     return resize(vol, target_shape, order=order, mode='edge', anti_aliasing=(order != 0))
 
-def extract_patches(img, mask, patch_size, background_ratio=1, true_bg_per_case=5):
-    # Lesion = (mask==2 or mask==3), Kidney-background = (mask==1 only), True background = (mask==0)
+def extract_patches(img, mask, patch_size, background_ratio=1, true_bg_per_case=10):
     slices = mask.shape[2]
     patch_list, mask_list, meta_list = [], [], []
 
-    # --- 1. Lesion patches (tumor or cyst) ---
+    lesion_indices = []
+    kidney_bg_indices = []
+    true_bg_indices = []
+
     for sl in range(slices):
+        # 1. Lesion: tumor or cyst
         lesion_mask = np.logical_or(mask[:,:,sl] == 2, mask[:,:,sl] == 3)
-        if not lesion_mask.any():
-            continue
-        # Use the whole slice as patch (fits patch size)
-        img_patch = img[:,:,sl:sl+1]
-        mask_patch = mask[:,:,sl:sl+1]
-        patch_list.append(img_patch)
-        mask_list.append(mask_patch)
-        meta_list.append({"slice": int(sl), "type": "lesion"})
+        if lesion_mask.any():
+            patch_list.append(img[:,:,sl:sl+1])
+            mask_list.append(mask[:,:,sl:sl+1])
+            meta_list.append({"slice": int(sl), "type": "lesion"})
+            lesion_indices.append(sl)
+        # 2. Kidney-background (any slice with kidney, but not lesion in center)
+        elif (mask[:,:,sl] == 1).any():
+            kidney_bg_indices.append(sl)
+        # 3. True-background: slices with no kidney, no lesion
+        elif (mask[:,:,sl] == 0).all():
+            true_bg_indices.append(sl)
 
-        # --- 2. Kidney-background patches ---
-        bg_mask = (mask[:,:,sl] == 1)
-        bg_idxs = np.argwhere(bg_mask)
-        if len(bg_idxs) > 0 and background_ratio > 0:
-            select_n = min(background_ratio, len(bg_idxs))
-            chosen = bg_idxs[np.random.choice(len(bg_idxs), select_n, replace=False)]
-            for i, j in chosen:
-                if i + patch_size[0] > img.shape[0] or j + patch_size[1] > img.shape[1]:
-                    continue
-                img_patch_bg = img[i:i+patch_size[0], j:j+patch_size[1], sl:sl+1]
-                mask_patch_bg = mask[i:i+patch_size[0], j:j+patch_size[1], sl:sl+1]
-                if img_patch_bg.shape == patch_size and mask_patch_bg.shape == patch_size:
-                    patch_list.append(img_patch_bg)
-                    mask_list.append(mask_patch_bg)
-                    meta_list.append({"slice": int(sl), "type": "background", "i": int(i), "j": int(j)})
+    # Sample kidney-background patches from kidney_bg_indices
+    n_kidney_bg = background_ratio * max(1, len(lesion_indices))  # for balance
+    chosen_kidney = np.random.choice(kidney_bg_indices, min(n_kidney_bg, len(kidney_bg_indices)), replace=False)
+    for sl in chosen_kidney:
+        patch_list.append(img[:,:,sl:sl+1])
+        mask_list.append(mask[:,:,sl:sl+1])
+        meta_list.append({"slice": int(sl), "type": "background"})
 
-    # --- 3. True-background patches (anywhere with mask==0) ---
-    all_true_bg = np.argwhere(mask == 0)
-    if len(all_true_bg) > 0:
-        chosen_true_bg = all_true_bg[np.random.choice(len(all_true_bg), min(true_bg_per_case, len(all_true_bg)), replace=False)]
-        for i, j, sl in chosen_true_bg:
-            if i + patch_size[0] > img.shape[0] or j + patch_size[1] > img.shape[1]:
-                continue
-            img_patch_bg = img[i:i+patch_size[0], j:j+patch_size[1], sl:sl+1]
-            mask_patch_bg = mask[i:i+patch_size[0], j:j+patch_size[1], sl:sl+1]
-            if img_patch_bg.shape == patch_size and mask_patch_bg.shape == patch_size:
-                patch_list.append(img_patch_bg)
-                mask_list.append(mask_patch_bg)
-                meta_list.append({"slice": int(sl), "type": "true_background", "i": int(i), "j": int(j)})
+    # Sample true-background patches (no kidney, no lesion)
+    n_true_bg = true_bg_per_case
+    if len(true_bg_indices) > 0:
+        chosen_true = np.random.choice(true_bg_indices, min(n_true_bg, len(true_bg_indices)), replace=False)
+        for sl in chosen_true:
+            patch_list.append(img[:,:,sl:sl+1])
+            mask_list.append(mask[:,:,sl:sl+1])
+            meta_list.append({"slice": int(sl), "type": "true_background"})
+
     return patch_list, mask_list, meta_list
+
 
 def process_case(case_dir, case_id):
     img_path = glob(os.path.join(case_dir, "*imaging.nii.gz"))[0]
