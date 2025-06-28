@@ -7,9 +7,8 @@ import yaml
 from sklearn.metrics import (
     accuracy_score, precision_score, recall_score, f1_score, confusion_matrix, roc_curve, auc
 )
-from torchvision.utils import save_image
 
-from dev.detection.model import get_model  # assumes your build_model loads arch from config
+from dev.detection.model import get_model  # assumes your get_model loads arch from config
 from dev.detection.dataset import RCCPatchDataset
 
 def plot_roc(y_true, y_score, out_path):
@@ -47,20 +46,20 @@ def plot_confusion(y_true, y_pred, out_path):
     plt.savefig(out_path)
     plt.close()
 
-def overlay_mask(image, mask, mask_color=(255,0,0), alpha=0.4):
-    """Overlay a binary mask on grayscale image (for QC visualization)."""
-    img = np.stack([image]*3, axis=-1)  # Grayscale to RGB
-    mask_rgb = np.zeros_like(img)
-    for c in range(3): mask_rgb[:,:,c] = mask_color[c]
-    mask_bool = (mask > 0)
-    img = img * (1-alpha) + mask_rgb * alpha * mask_bool[:,:,None]
-    img = np.clip(img, 0, 1)
+def overlay_mask(image, label, mask_color=(255,0,0), alpha=0.4):
+    """Overlay a red color if label==1, else just grayscale."""
+    img = np.stack([image]*3, axis=-1)
+    if label == 1:
+        # Overlay red
+        mask_rgb = np.zeros_like(img)
+        for c in range(3): mask_rgb[:,:,c] = mask_color[c]
+        img = img * (1-alpha) + mask_rgb * alpha
+        img = np.clip(img, 0, 1)
     return img
 
-def save_patch_with_mask(image, mask, pred_prob, gt_label, out_path, title=None):
+def save_patch_with_label(image, pred_prob, gt_label, out_path, title=None):
     img_disp = image.squeeze()
-    mask_disp = mask.squeeze()
-    overlay = overlay_mask(img_disp, mask_disp, mask_color=(255,0,0), alpha=0.4)
+    overlay = overlay_mask(img_disp, gt_label, mask_color=(255,0,0), alpha=0.3)
     plt.figure(figsize=(3, 3))
     plt.imshow(overlay)
     plt.axis('off')
@@ -84,6 +83,8 @@ def main():
 
     # Load config
     config_path = os.path.join(args.run_dir, 'config.yaml')
+    if not os.path.exists(config_path):
+        config_path = os.path.join(args.run_dir, 'detection.yaml')  # fallback
     with open(config_path, 'r') as f:
         config = yaml.safe_load(f)
 
@@ -99,7 +100,6 @@ def main():
     print(f"Loaded {len(val_dataset)} patches for evaluation.")
 
     # Load model
-    # Load model
     model = get_model(config['model'].get('pretrained', False))
     checkpoint = torch.load(args.model_path, map_location=device)
     if isinstance(checkpoint, dict) and "model" in checkpoint:
@@ -110,27 +110,21 @@ def main():
     model = model.to(device)
     model.eval()
 
-
-    all_probs, all_labels, all_imgs, all_masks, all_meta = [], [], [], [], []
+    all_probs, all_labels, all_imgs, all_meta = [], [], [], []
     batch_size = 64
     loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=False, num_workers=2)
 
     # Collect predictions
     with torch.no_grad():
         for imgs, labels, metas in loader:
-            imgs = imgs.to(device)  # [B,1,224,224]
+            imgs = imgs.to(device)
             logits = model(imgs)
             probs = torch.sigmoid(logits).squeeze().cpu().numpy()
-            # If 2-class softmax, take class 1
             if len(probs.shape) > 1 and probs.shape[1] == 2:
                 probs = probs[:,1]
             all_probs.append(probs)
             all_labels.append(labels.numpy())
-            # For visualization
             all_imgs.append(imgs.cpu().numpy())
-            # Get mask (from meta dict, requires loading .npz file for each case/patch)
-            # We'll just get mask from meta for now
-            all_masks.extend([(meta['mask'] if isinstance(meta, dict) and 'mask' in meta else np.zeros((224,224))) for meta in metas])
             all_meta.extend(metas)
 
     all_probs = np.concatenate(all_probs)
@@ -159,32 +153,26 @@ def main():
     with open(os.path.join(qc_dir, "metrics.txt"), 'w') as f:
         f.write(metrics_str)
 
-    # Failure analysis
-    idx_conf_pos = np.argsort(-all_probs)[:args.num_examples]
-    idx_conf_neg = np.argsort(all_probs)[:args.num_examples]
-    idx_uncertain = np.argsort(np.abs(all_probs - 0.5))[:args.num_examples]
+    # Failure analysis: always stay in bounds
+    N = min(args.num_examples, len(all_probs))
+    idx_conf_pos = np.argsort(-all_probs)[:N]
+    idx_conf_neg = np.argsort(all_probs)[:N]
+    idx_uncertain = np.argsort(np.abs(all_probs - 0.5))[:N]
 
     def save_examples(idxs, name):
         for i, idx in enumerate(idxs):
             img = all_imgs[idx].squeeze()
             label = all_labels[idx]
             prob = all_probs[idx]
-            meta = all_meta[idx]
-            # Overlay mask: only for positive (if available)
-            mask = np.zeros((224,224))
-            if isinstance(meta, dict) and 'mask' in meta:
-                mask = meta['mask']
-            elif hasattr(meta, 'get') and meta.get('mask') is not None:
-                mask = meta['mask']
-            save_patch_with_mask(img, mask, prob, label, os.path.join(qc_dir, f"{name}_{i}_label{label}_prob{prob:.2f}.png"),
+            save_patch_with_label(img, prob, label, os.path.join(qc_dir, f"{name}_{i}_label{label}_prob{prob:.2f}.png"),
                                  title=f"{name}: prob={prob:.2f}, label={label}")
+
     save_examples(idx_conf_pos, "confident_lesion")
     save_examples(idx_conf_neg, "confident_bg")
     save_examples(idx_uncertain, "uncertain")
 
-    # False positive/negatives
-    fp_idxs = np.where((y_pred == 1) & (all_labels == 0))[0][:args.num_examples]
-    fn_idxs = np.where((y_pred == 0) & (all_labels == 1))[0][:args.num_examples]
+    fp_idxs = np.where((y_pred == 1) & (all_labels == 0))[0][:N]
+    fn_idxs = np.where((y_pred == 0) & (all_labels == 1))[0][:N]
     save_examples(fp_idxs, "false_positive")
     save_examples(fn_idxs, "false_negative")
 
