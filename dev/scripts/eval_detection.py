@@ -9,7 +9,7 @@ from sklearn.metrics import (
 )
 from torchvision.utils import save_image
 
-from dev.detection.model import build_model  # assumes your build_model loads arch from config
+from dev.detection.model import get_model  # assumes your build_model loads arch from config
 from dev.detection.dataset import RCCPatchDataset
 
 def plot_roc(y_true, y_score, out_path):
@@ -99,7 +99,7 @@ def main():
     print(f"Loaded {len(val_dataset)} patches for evaluation.")
 
     # Load model
-    model = build_model(config['model'])
+    model = get_model(config['model'])
     model.load_state_dict(torch.load(args.model_path, map_location=device))
     model = model.to(device)
     model.eval()
