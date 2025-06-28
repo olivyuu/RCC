@@ -65,16 +65,28 @@ class RCCPatchDataset(Dataset):
     def __len__(self):
         return len(self.images)
 
-    def __getitem__(self, idx):
-        img = self.images[idx]
-        label = self.labels[idx]
-        mask = self.masks[idx]
-        meta = self.metas[idx]
-        # Convert to PIL Image for transforms that expect PIL
-        # Scale to [0,255] and cast to uint8
-        img_uint8 = (img * 255).clip(0,255).astype(np.uint8)
-        img_pil = Image.fromarray(img_uint8, mode='L')
-        img_torch = self.transform(img_pil)  # [1, 224, 224]
-        # For mask, just convert to torch tensor (no augmentation)
-        mask_torch = torch.from_numpy(mask).long()
-        return img_torch, label, mask_torch, meta
+    from PIL import Image
+import numpy as np
+import torch
+
+def __getitem__(self, idx):
+    img = self.images[idx]       # shape: (224, 224)
+    label = self.labels[idx]
+    mask = self.masks[idx]       # shape: (224, 224)
+    meta = self.metas[idx]
+
+    # Convert single-channel float image to PIL.Image for augmentations
+    # Normalize to 0-255 and uint8 for PIL, then back to float32 [0,1]
+    img_for_pil = np.clip(img, 0, 1)
+    img_pil = Image.fromarray((img_for_pil * 255).astype(np.uint8), mode='L')
+
+    if self.transform:
+        img_torch = self.transform(img_pil)
+    else:
+        img_torch = torch.from_numpy(img_for_pil[None, ...].astype(np.float32))  # [1, H, W]
+
+    # For mask QC
+    mask_torch = torch.from_numpy(mask.astype(np.uint8))[None, :, :]  # [1, H, W]
+
+    return img_torch, int(label), mask_torch, meta
+
