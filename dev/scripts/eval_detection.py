@@ -9,33 +9,46 @@ from dev.detection.dataset import RCCPatchDataset
 
 def plot_patch_with_masks(img, mask, outpath, meta=None, label=None, pred=None, prob=None):
     plt.figure(figsize=(4, 4))
-    plt.imshow(img, cmap='gray')
+    plt.imshow(img, cmap='gray', interpolation='none')
     legend_handles = []
     mask_kidney = (mask == 1)
     mask_tumor  = (mask == 2)
     mask_cyst   = (mask == 3)
-    # Overlay each mask with different color
+    # Overlay as solid masks with increased alpha and no interpolation
     if mask_kidney.any():
-        plt.imshow(np.ma.masked_where(mask_kidney == 0, mask_kidney), alpha=0.3, cmap="Blues")
+        plt.imshow(mask_kidney, alpha=0.5, cmap="Blues", interpolation='none')
         legend_handles.append(plt.Rectangle((0,0),1,1, color=plt.get_cmap("Blues")(0.6)))
     if mask_tumor.any():
-        plt.imshow(np.ma.masked_where(mask_tumor == 0, mask_tumor), alpha=0.3, cmap="Reds")
+        plt.imshow(mask_tumor, alpha=0.5, cmap="Reds", interpolation='none')
         legend_handles.append(plt.Rectangle((0,0),1,1, color=plt.get_cmap("Reds")(0.6)))
     if mask_cyst.any():
-        plt.imshow(np.ma.masked_where(mask_cyst == 0, mask_cyst), alpha=0.3, cmap="Oranges")
+        plt.imshow(mask_cyst, alpha=0.5, cmap="Oranges", interpolation='none')
         legend_handles.append(plt.Rectangle((0,0),1,1, color=plt.get_cmap("Oranges")(0.6)))
     label_names = []
     if mask_kidney.any(): label_names.append("Kidney")
-    if mask_tumor.any(): label_names.append("Tumor")
-    if mask_cyst.any():  label_names.append("Cyst")
+    if mask_tumor.any():  label_names.append("Tumor")
+    if mask_cyst.any():   label_names.append("Cyst")
     if legend_handles:
         plt.legend(legend_handles, label_names, fontsize=8, loc='lower right')
     # Title: show meta info and classification results
-    title = ""
-    if meta is not None and hasattr(meta, 'item'):
-        meta = meta.item()
+    meta_str = "?"
+    type_str = "?"
     if isinstance(meta, dict):
-        title = f"Slice {meta.get('slice', '?')}, Type: {meta.get('type', '?')}"
+        meta_str = meta.get('slice', '?')
+        type_str = meta.get('type', '?')
+    elif isinstance(meta, str):
+        # Try to parse string dict if it looks like one
+        if meta.startswith("{") and meta.endswith("}"):
+            try:
+                import ast
+                meta_dict = ast.literal_eval(meta)
+                meta_str = meta_dict.get('slice', '?')
+                type_str = meta_dict.get('type', '?')
+            except Exception:
+                pass
+        else:
+            type_str = meta
+    title = f"Slice {meta_str}, Type: {type_str}"
     if label is not None and prob is not None and pred is not None:
         title += f"\nGT: {label}, Pred: {pred}, Prob: {prob:.2f}"
     plt.title(title, fontsize=8)
@@ -43,6 +56,7 @@ def plot_patch_with_masks(img, mask, outpath, meta=None, label=None, pred=None, 
     plt.tight_layout()
     plt.savefig(outpath)
     plt.close()
+
 
 def main():
     parser = argparse.ArgumentParser()
