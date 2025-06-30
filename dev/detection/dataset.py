@@ -60,8 +60,10 @@ class RCCPatchDataset(Dataset):
                 transforms.Lambda(lambda img: Image.fromarray((img * 255).astype(np.uint8).squeeze())),  # (224,224) to PIL
                 transforms.RandomHorizontalFlip(),
                 transforms.RandomVerticalFlip(),
-                transforms.RandomRotation(20),
-                transforms.ColorJitter(brightness=0.1, contrast=0.1),
+                transforms.RandomRotation(30),                       # Stronger rotation
+                transforms.ColorJitter(brightness=0.2, contrast=0.2),# Stronger jitter
+                transforms.RandomAffine(degrees=0, translate=(0.1,0.1)),  # Random translation
+                transforms.RandomResizedCrop(224, scale=(0.9, 1.0)), # Random crop and resize
                 transforms.ToTensor(),  # Converts back to torch tensor [1,224,224]
             ])
         else:
