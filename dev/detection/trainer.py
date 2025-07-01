@@ -4,6 +4,8 @@ import numpy as np
 from dev.detection.dataset import RCCPatchDataset
 from dev.detection.model import get_model
 from sklearn.metrics import accuracy_score
+from torch.optim.lr_scheduler import CyclicLR
+
 
 def save_log(logfile, message):
     with open(logfile, 'a') as f:
@@ -32,6 +34,9 @@ def train_detection(config, run_dir):
     scheduler_type = train_conf.get('scheduler', 'step')
     scheduler_step_size = train_conf.get('scheduler_step_size', 40)
     scheduler_gamma = train_conf.get('scheduler_gamma', 0.5)
+    base_lr = train_conf.get('base_lr', 1e-4)
+    max_lr = train_conf.get('max_lr', 1e-3)
+    step_size_up = train_conf.get('step_size_up', 10)
 
     # --- Model config ---
     model_conf = config.get('model', {})
@@ -42,6 +47,7 @@ def train_detection(config, run_dir):
     train_set = RCCPatchDataset(data_dir, split='train', split_seed=split_seed, split_frac=split_frac, augment=augment)
     val_set = RCCPatchDataset(data_dir, split='val', split_seed=split_seed, split_frac=split_frac, augment=False)
     train_loader = torch.utils.data.DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=num_workers)
+    print("Batches per epoch:", len(train_loader)) #help set step_size_up
     val_loader = torch.utils.data.DataLoader(val_set, batch_size=batch_size, shuffle=False, num_workers=num_workers)
 
     # --- Model ---
@@ -52,10 +58,20 @@ def train_detection(config, run_dir):
     criterion = torch.nn.BCEWithLogitsLoss()
 
     # --- Scheduler ---
-    if scheduler_type == 'step':
+    if scheduler_type == 'cyclic':
+        scheduler = CyclicLR(
+            optimizer,
+            base_lr=base_lr,
+            max_lr=max_lr,
+            step_size_up=step_size_up,
+            mode='triangular2',
+            cycle_momentum=False
+        )
+    elif scheduler_type == 'step':
         scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=scheduler_step_size, gamma=scheduler_gamma)
     else:
         scheduler = None
+
 
     best_val_acc = 0.0
     best_epoch = -1
@@ -72,6 +88,8 @@ def train_detection(config, run_dir):
             loss = criterion(logits, labels)
             loss.backward()
             optimizer.step()
+            if scheduler is not None and scheduler_type == 'cyclic':
+                scheduler.step()
             train_loss.append(loss.item())
             train_preds.extend(torch.sigmoid(logits).detach().cpu().numpy() > 0.5)
             train_labels.extend(labels.cpu().numpy())
@@ -108,7 +126,7 @@ def train_detection(config, run_dir):
             save_log(logfile, f"Best model updated (epoch {best_epoch}, val_acc {best_val_acc:.4f})")
 
         # Step scheduler if present
-        if scheduler is not None:
+        if scheduler is not None and scheduler_type != 'cyclic':
             scheduler.step()
 
     # Final summary

@@ -4,10 +4,10 @@ experiment_name: "baseline_densenet_patch"
 output_dir: "dev/runs/"
 data:
   processed_dir: "dev/data/processed/kits23/"
-  batch_size: 32
+  batch_size: 16
   num_workers: 4
   patch_size: [224, 224]
-  split_seed: 42
+  split_seed: 123
   train_frac: 0.8
   augment: true
 
@@ -17,19 +17,22 @@ model:
   num_classes: 2
 
 train:
-  epochs: 100
+  epochs: 200
   optimizer: "adam"
-  lr: 0.0005
+  scheduler: "cyclic"
+  base_lr: 0.0001
+  max_lr: 0.001
+  step_size_up: 600 
+  lr: 0.0003
   weight_decay: 0.0001
-  scheduler: "step"
   scheduler_step_size: 40
   scheduler_gamma: 0.5
 
 loss:
   name: "bce"
-  pos_weight: 1.0
+  pos_weight: 1.6
 
 misc:
-  seed: 42
+  seed: 123
   testing: false  # set to true for short test runs
   save_interval: 10  # save checkpoint every N epochs (optional)
