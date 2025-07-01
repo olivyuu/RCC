@@ -15,13 +15,14 @@ model:
   arch: "densenet121"
   pretrained: false
   num_classes: 2
+  dropout: 0.2
 
 train:
   epochs: 200
   optimizer: "adam"
   scheduler: "cyclic"
   base_lr: 0.0001
-  max_lr: 0.001
+  max_lr: 0.0003
   step_size_up: 600 
   lr: 0.0003
   weight_decay: 0.0001
@@ -30,7 +31,7 @@ train:
 
 loss:
   name: "bce"
-  pos_weight: 1.6
+  pos_weight: 1.4
 
 misc:
   seed: 123

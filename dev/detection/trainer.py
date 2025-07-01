@@ -42,6 +42,7 @@ def train_detection(config, run_dir):
     model_conf = config.get('model', {})
     arch = model_conf.get('arch', "densenet121")
     pretrained = model_conf.get('pretrained', False)
+    dropout = model_conf.get('dropout', 0.2)
 
     # --- Datasets ---
     train_set = RCCPatchDataset(data_dir, split='train', split_seed=split_seed, split_frac=split_frac, augment=augment)
@@ -51,7 +52,8 @@ def train_detection(config, run_dir):
     val_loader = torch.utils.data.DataLoader(val_set, batch_size=batch_size, shuffle=False, num_workers=num_workers)
 
     # --- Model ---
-    model = get_model(pretrained=pretrained).to(device)
+    model = get_model(pretrained=pretrained, arch=arch, dropout=dropout).to(device)
+
 
     # --- Optimizer and Loss ---
     optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
