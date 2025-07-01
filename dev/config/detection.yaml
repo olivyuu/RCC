@@ -7,7 +7,7 @@ data:
   batch_size: 16
   num_workers: 4
   patch_size: [224, 224]
-  split_seed: 123
+  split_seed: 33
   train_frac: 0.8
   augment: true
 
@@ -15,12 +15,15 @@ model:
   arch: "densenet121"
   pretrained: false
   num_classes: 2
-  dropout: 0.2
+  dropout: 0.3
 
 train:
   epochs: 200
   optimizer: "adam"
-  scheduler: "cyclic"
+  scheduler: "plateau"
+  lr_patience: 7      # Number of epochs with no improvement before reducing LR
+  lr_factor: 0.5       # LR reduction factor (e.g. halve the LR)
+  min_lr: 0.00001
   base_lr: 0.0001
   max_lr: 0.0003
   step_size_up: 600 
@@ -31,9 +34,9 @@ train:
 
 loss:
   name: "bce"
-  pos_weight: 1.4
+  pos_weight: 1.3
 
 misc:
-  seed: 123
+  seed: 33
   testing: false  # set to true for short test runs
   save_interval: 10  # save checkpoint every N epochs (optional)

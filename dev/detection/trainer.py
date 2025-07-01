@@ -37,6 +37,10 @@ def train_detection(config, run_dir):
     base_lr = train_conf.get('base_lr', 1e-4)
     max_lr = train_conf.get('max_lr', 1e-3)
     step_size_up = train_conf.get('step_size_up', 10)
+    lr_patience = train_conf.get('lr_patience', 10)
+    lr_factor = train_conf.get('lr_factor', 0.5)
+    min_lr = train_conf.get('min_lr', 1e-5)
+
 
     # --- Model config ---
     model_conf = config.get('model', {})
@@ -70,9 +74,16 @@ def train_detection(config, run_dir):
             cycle_momentum=False
         )
     elif scheduler_type == 'step':
-        scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=scheduler_step_size, gamma=scheduler_gamma)
+        scheduler = torch.optim.lr_scheduler.StepLR(
+            optimizer, step_size=scheduler_step_size, gamma=scheduler_gamma
+        )
+    elif scheduler_type == 'plateau':
+        scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(
+            optimizer, mode='min', patience=lr_patience, factor=lr_factor, min_lr=min_lr, verbose=True
+        )
     else:
         scheduler = None
+
 
 
     best_val_acc = 0.0
@@ -128,8 +139,12 @@ def train_detection(config, run_dir):
             save_log(logfile, f"Best model updated (epoch {best_epoch}, val_acc {best_val_acc:.4f})")
 
         # Step scheduler if present
-        if scheduler is not None and scheduler_type != 'cyclic':
-            scheduler.step()
+        if scheduler is not None:
+            if scheduler_type == 'plateau':
+                scheduler.step(val_loss_mean)  # Pass in val loss
+            elif scheduler_type != 'cyclic':
+                scheduler.step()
+
 
     # Final summary
     save_log(logfile, f"Best epoch: {best_epoch} (val_acc {best_val_acc:.4f})")
