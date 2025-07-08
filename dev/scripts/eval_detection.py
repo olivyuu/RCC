@@ -59,10 +59,16 @@ def main():
             # File/case info
         # ---- FIX: Ensure metas is always a list ----
         # Some DataLoader configs may give a dict, some a list. We always want a list of dicts/strs.
-            if isinstance(metas, dict):
+            # Ensure metas is a list of meta dicts/strs, one per sample in the batch
+            if isinstance(metas, np.ndarray):
+                metas = metas.tolist()
+            elif isinstance(metas, dict):
                 metas = [metas]
-            elif not isinstance(metas, (list, tuple, np.ndarray)):
+            elif isinstance(metas, (list, tuple)):
                 metas = list(metas)
+            else:
+                metas = [metas] * images.shape[0]  # fallback, rare
+
 
             for i in range(len(metas)):
                 meta = metas[i]
@@ -84,7 +90,8 @@ def main():
                         case, slice_num, patch_type, patch_file = None, None, None, None
                 else:
                     case, slice_num, patch_type, patch_file = None, None, None, None
-                all_fileinfo.append((case, slice_num, patch_type, patch_file, batch_idx, i))
+                all_fileinfo.append((patch_file, slice_num, patch_type, batch_idx, i))
+
 
 
             # For image saving (keep for future reactivation)
@@ -104,10 +111,11 @@ def main():
     csv_path = os.path.join(qc_dir, "predictions.csv")
     with open(csv_path, "w", newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(["case_id", "slice", "patch_type", "patch_file", "batch_idx", "idx_in_batch", "ground_truth", "pred", "confidence"])
+        writer.writerow(["patch_file", "slice", "patch_type", "batch_idx", "idx_in_batch", "ground_truth", "pred", "confidence"])
         for info, gt, pred, conf in zip(all_fileinfo, all_labels, all_preds, all_probs):
-            case, slice_num, patch_type, patch_file, batch_idx, i = info
-            writer.writerow([case, slice_num, patch_type, patch_file, batch_idx, i, int(gt), int(pred), float(conf)])
+            patch_file, slice_num, patch_type, batch_idx, i = info
+            writer.writerow([patch_file, slice_num, patch_type, batch_idx, i, int(gt), int(pred), float(conf)])
+
 
     print(f"Saved prediction outputs to {csv_path}")
 
