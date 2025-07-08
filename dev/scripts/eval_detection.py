@@ -8,6 +8,13 @@ import matplotlib.pyplot as plt
 from dev.detection.model import get_model
 from dev.detection.dataset import RCCPatchDataset
 
+def custom_collate(batch):
+    images, labels, masks, metas = zip(*batch)
+    images = torch.stack(images)
+    labels = torch.tensor(labels)
+    masks = torch.stack(masks)
+    return images, labels, masks, list(metas)
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_path', type=str, required=True)
@@ -27,7 +34,8 @@ def main():
     print("Selected file names:", dataset.selected_files)
     print("Total number of patches:", len(dataset))
 
-    loader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=False)
+    loader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=False, collate_fn=custom_collate)
+
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model = get_model(pretrained=False, dropout=None).to(device)
@@ -60,14 +68,7 @@ def main():
         # ---- FIX: Ensure metas is always a list ----
         # Some DataLoader configs may give a dict, some a list. We always want a list of dicts/strs.
             # Ensure metas is a list of meta dicts/strs, one per sample in the batch
-            if isinstance(metas, np.ndarray):
-                metas = metas.tolist()
-            elif isinstance(metas, dict):
-                metas = [metas]
-            elif isinstance(metas, (list, tuple)):
-                metas = list(metas)
-            else:
-                metas = [metas] * images.shape[0]  # fallback, rare
+            
             print(f"[BATCH {batch_idx}] batch size: {images.shape[0]}, len(metas): {len(metas)}")
 
             for i in range(len(metas)):
