@@ -68,7 +68,7 @@ def main():
                 metas = list(metas)
             else:
                 metas = [metas] * images.shape[0]  # fallback, rare
-
+            print(f"[BATCH {batch_idx}] batch size: {images.shape[0]}, len(metas): {len(metas)}")
 
             for i in range(len(metas)):
                 meta = metas[i]
