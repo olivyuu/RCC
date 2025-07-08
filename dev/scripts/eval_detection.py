@@ -61,10 +61,12 @@ def main():
 
         for i in range(len(metas)):
             meta = metas[i]
+            patch_file = None
             if isinstance(meta, dict):
                 case = meta.get('case_id', None)
                 slice_num = meta.get('slice', None)
                 patch_type = meta.get('type', None)
+                patch_file = meta.get('patch_file', None)
             elif isinstance(meta, str) and meta.startswith("{") and meta.endswith("}"):
                 import ast
                 try:
@@ -72,11 +74,13 @@ def main():
                     case = meta_dict.get('case_id', None)
                     slice_num = meta_dict.get('slice', None)
                     patch_type = meta_dict.get('type', None)
+                    patch_file = meta_dict.get('patch_file', None)
                 except Exception:
-                    case, slice_num, patch_type = None, None, None
+                    case, slice_num, patch_type, patch_file = None, None, None, None
             else:
-                case, slice_num, patch_type = None, None, None
-            all_fileinfo.append((case, slice_num, patch_type, batch_idx, i))
+                case, slice_num, patch_type, patch_file = None, None, None, None
+            all_fileinfo.append((case, slice_num, patch_type, patch_file, batch_idx, i))
+
 
             # For image saving (keep for future reactivation)
             imgs_np = images.cpu().numpy()
@@ -95,10 +99,11 @@ def main():
     csv_path = os.path.join(qc_dir, "predictions.csv")
     with open(csv_path, "w", newline='') as csvfile:
         writer = csv.writer(csvfile)
-        writer.writerow(["case_id", "slice", "patch_type", "batch_idx", "idx_in_batch", "ground_truth", "pred", "confidence"])
+        writer.writerow(["case_id", "slice", "patch_type", "patch_file", "batch_idx", "idx_in_batch", "ground_truth", "pred", "confidence"])
         for info, gt, pred, conf in zip(all_fileinfo, all_labels, all_preds, all_probs):
-            case, slice_num, patch_type, batch_idx, i = info
-            writer.writerow([case, slice_num, patch_type, batch_idx, i, int(gt), int(pred), float(conf)])
+            case, slice_num, patch_type, patch_file, batch_idx, i = info
+            writer.writerow([case, slice_num, patch_type, patch_file, batch_idx, i, int(gt), int(pred), float(conf)])
+
     print(f"Saved prediction outputs to {csv_path}")
 
     # Metrics and plots

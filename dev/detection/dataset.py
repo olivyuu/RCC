@@ -42,7 +42,23 @@ class RCCPatchDataset(Dataset):
             self.images.extend([patch[...,0] for patch in patches])
             self.masks.extend([mask[...,0] for mask in masks])
             self.labels.extend(labels)
-            self.metas.extend(meta)
+         # Attach filename to each meta dict for traceability
+            for m in meta:
+                if isinstance(m, dict):
+                    m = dict(m)
+                    m['patch_file'] = pf
+                    self.metas.append(m)
+                elif isinstance(m, str) and m.startswith("{") and m.endswith("}"):
+                    import ast
+                    try:
+                        m_dict = ast.literal_eval(m)
+                        m_dict['patch_file'] = pf
+                        self.metas.append(str(m_dict))
+                    except Exception:
+                        self.metas.append(m)
+                else:
+                    self.metas.append(m)
+
         self.images = np.stack(self.images) # (N, 224, 224)
         self.masks = np.stack(self.masks)
         self.labels = np.array(self.labels)
