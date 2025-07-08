@@ -31,13 +31,13 @@
 **Run:**
 
 ```bash
-python dev/detection/preprocessing.py --raw_dir kits23/dataset/
+python dev/preprocessing/preprocessing.py --raw_dir kits23/dataset/
 ```
 
 *Optionally*, use `--max_cases` to process a subset for testing:
 
 ```bash
-python dev/detection/preprocessing.py --raw_dir kits23/dataset/ --max_cases 10
+python dev/preprocessing/preprocessing.py --raw_dir kits23/dataset/ --max_cases 10
 ```
 
 **Output:**

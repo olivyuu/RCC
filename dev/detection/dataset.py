@@ -20,7 +20,9 @@ class RCCPatchDataset(Dataset):
         idxs = list(range(n))
         random.shuffle(idxs)
         split_point = int(n * split_frac)
-        if split == 'train':
+        if split == 'all':
+            chosen = self.patch_files  # Use all files!
+        elif split == 'train':
             chosen = [self.patch_files[i] for i in idxs[:split_point]]
         else:
             chosen = [self.patch_files[i] for i in idxs[split_point:]]
