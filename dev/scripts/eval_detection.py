@@ -22,6 +22,11 @@ def main():
 
     print(f"Loading {args.split} dataset from {args.processed_dir} ...")
     dataset = RCCPatchDataset(args.processed_dir, split=args.split, augment=False)
+    print("Number of patch files found:", len(dataset.patch_files))
+    print("Selected files for this split:", len(dataset.selected_files))
+    print("Selected file names:", dataset.selected_files)
+    print("Total number of patches:", len(dataset))
+
     loader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=False)
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
