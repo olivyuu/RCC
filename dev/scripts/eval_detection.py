@@ -52,24 +52,32 @@ def main():
             all_probs.extend(probs)
             all_meta.extend(metas)
             # File/case info
-            for i in range(len(metas)):
-                meta = metas[i]
-                if isinstance(meta, dict):
-                    case = meta.get('case_id', None)
-                    slice_num = meta.get('slice', None)
-                    patch_type = meta.get('type', None)
-                elif isinstance(meta, str) and meta.startswith("{") and meta.endswith("}"):
-                    import ast
-                    try:
-                        meta_dict = ast.literal_eval(meta)
-                        case = meta_dict.get('case_id', None)
-                        slice_num = meta_dict.get('slice', None)
-                        patch_type = meta_dict.get('type', None)
-                    except:
-                        case, slice_num, patch_type = None, None, None
-                else:
+        # ---- FIX: Ensure metas is always a list ----
+        # Some DataLoader configs may give a dict, some a list. We always want a list of dicts/strs.
+        if isinstance(metas, dict):
+            metas = [metas]
+        elif not isinstance(metas, (list, tuple, np.ndarray)):
+            metas = list(metas)
+
+        for i in range(len(metas)):
+            meta = metas[i]
+            if isinstance(meta, dict):
+                case = meta.get('case_id', None)
+                slice_num = meta.get('slice', None)
+                patch_type = meta.get('type', None)
+            elif isinstance(meta, str) and meta.startswith("{") and meta.endswith("}"):
+                import ast
+                try:
+                    meta_dict = ast.literal_eval(meta)
+                    case = meta_dict.get('case_id', None)
+                    slice_num = meta_dict.get('slice', None)
+                    patch_type = meta_dict.get('type', None)
+                except Exception:
                     case, slice_num, patch_type = None, None, None
-                all_fileinfo.append((case, slice_num, patch_type, batch_idx, i))
+            else:
+                case, slice_num, patch_type = None, None, None
+            all_fileinfo.append((case, slice_num, patch_type, batch_idx, i))
+
             # For image saving (keep for future reactivation)
             imgs_np = images.cpu().numpy()
             masks_np = masks.cpu().numpy()
