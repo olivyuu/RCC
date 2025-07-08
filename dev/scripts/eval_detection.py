@@ -2,61 +2,11 @@ import os
 import argparse
 import torch
 import numpy as np
+import csv
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix, roc_curve
 import matplotlib.pyplot as plt
 from dev.detection.model import get_model
 from dev.detection.dataset import RCCPatchDataset
-
-def plot_patch_with_masks(img, mask, outpath, meta=None, label=None, pred=None, prob=None):
-    plt.figure(figsize=(4, 4))
-    plt.imshow(img, cmap='gray', interpolation='none')
-    legend_handles = []
-    mask_kidney = (mask == 1)
-    mask_tumor  = (mask == 2)
-    mask_cyst   = (mask == 3)
-    # Overlay as solid masks with increased alpha and no interpolation
-    if mask_kidney.any():
-        plt.imshow(mask_kidney, alpha=0.5, cmap="Blues", interpolation='none')
-        legend_handles.append(plt.Rectangle((0,0),1,1, color=plt.get_cmap("Blues")(0.6)))
-    if mask_tumor.any():
-        plt.imshow(mask_tumor, alpha=0.5, cmap="Reds", interpolation='none')
-        legend_handles.append(plt.Rectangle((0,0),1,1, color=plt.get_cmap("Reds")(0.6)))
-    if mask_cyst.any():
-        plt.imshow(mask_cyst, alpha=0.5, cmap="Oranges", interpolation='none')
-        legend_handles.append(plt.Rectangle((0,0),1,1, color=plt.get_cmap("Oranges")(0.6)))
-    label_names = []
-    if mask_kidney.any(): label_names.append("Kidney")
-    if mask_tumor.any():  label_names.append("Tumor")
-    if mask_cyst.any():   label_names.append("Cyst")
-    if legend_handles:
-        plt.legend(legend_handles, label_names, fontsize=8, loc='lower right')
-    # Title: show meta info and classification results
-    meta_str = "?"
-    type_str = "?"
-    if isinstance(meta, dict):
-        meta_str = meta.get('slice', '?')
-        type_str = meta.get('type', '?')
-    elif isinstance(meta, str):
-        # Try to parse string dict if it looks like one
-        if meta.startswith("{") and meta.endswith("}"):
-            try:
-                import ast
-                meta_dict = ast.literal_eval(meta)
-                meta_str = meta_dict.get('slice', '?')
-                type_str = meta_dict.get('type', '?')
-            except Exception:
-                pass
-        else:
-            type_str = meta
-    title = f"Slice {meta_str}, Type: {type_str}"
-    if label is not None and prob is not None and pred is not None:
-        title += f"\nGT: {label}, Pred: {pred}, Prob: {prob:.2f}"
-    plt.title(title, fontsize=8)
-    plt.axis('off')
-    plt.tight_layout()
-    plt.savefig(outpath)
-    plt.close()
-
 
 def main():
     parser = argparse.ArgumentParser()
@@ -87,11 +37,12 @@ def main():
     all_labels = []
     all_meta = []
     all_probs = []
+    all_fileinfo = []
     all_imgs = []
     all_masks = []
 
     with torch.no_grad():
-        for images, labels, masks, metas in loader:
+        for batch_idx, (images, labels, masks, metas) in enumerate(loader):
             images = images.to(device)
             logits = model(images).squeeze(1)
             probs = torch.sigmoid(logits).cpu().numpy()
@@ -100,6 +51,26 @@ def main():
             all_labels.extend(labels.numpy())
             all_probs.extend(probs)
             all_meta.extend(metas)
+            # File/case info
+            for i in range(len(metas)):
+                meta = metas[i]
+                if isinstance(meta, dict):
+                    case = meta.get('case_id', None)
+                    slice_num = meta.get('slice', None)
+                    patch_type = meta.get('type', None)
+                elif isinstance(meta, str) and meta.startswith("{") and meta.endswith("}"):
+                    import ast
+                    try:
+                        meta_dict = ast.literal_eval(meta)
+                        case = meta_dict.get('case_id', None)
+                        slice_num = meta_dict.get('slice', None)
+                        patch_type = meta_dict.get('type', None)
+                    except:
+                        case, slice_num, patch_type = None, None, None
+                else:
+                    case, slice_num, patch_type = None, None, None
+                all_fileinfo.append((case, slice_num, patch_type, batch_idx, i))
+            # For image saving (keep for future reactivation)
             imgs_np = images.cpu().numpy()
             masks_np = masks.cpu().numpy()
             for i in range(imgs_np.shape[0]):
@@ -112,6 +83,17 @@ def main():
     all_labels = np.array(all_labels)
     all_probs = np.array(all_probs)
 
+    # Save all predictions as CSV
+    csv_path = os.path.join(qc_dir, "predictions.csv")
+    with open(csv_path, "w", newline='') as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["case_id", "slice", "patch_type", "batch_idx", "idx_in_batch", "ground_truth", "pred", "confidence"])
+        for info, gt, pred, conf in zip(all_fileinfo, all_labels, all_preds, all_probs):
+            case, slice_num, patch_type, batch_idx, i = info
+            writer.writerow([case, slice_num, patch_type, batch_idx, i, int(gt), int(pred), float(conf)])
+    print(f"Saved prediction outputs to {csv_path}")
+
+    # Metrics and plots
     acc = accuracy_score(all_labels, all_preds)
     prec = precision_score(all_labels, all_preds)
     rec = recall_score(all_labels, all_preds)
@@ -149,24 +131,78 @@ def main():
     plt.savefig(os.path.join(qc_dir, "confusion_matrix.png"))
     plt.close()
 
-    idx_conf_pos = np.argsort(-all_probs)[:args.num_examples]
-    idx_conf_neg = np.argsort(all_probs)[:args.num_examples]
-    idx_uncertain = np.argsort(np.abs(all_probs - 0.5))[:args.num_examples]
+    print(f"Saved metrics and curves to {qc_dir}")
 
-    def save_examples(indices, name):
-        for i, idx in enumerate(indices):
-            if idx >= len(all_imgs): continue
-            img = all_imgs[idx]
-            mask = all_masks[idx] if idx < len(all_masks) else np.zeros_like(img)
-            meta = all_meta[idx] if idx < len(all_meta) else {}
-            outpath = os.path.join(qc_dir, f"{name}_{i}_label{all_labels[idx]}_pred{all_preds[idx]}_prob{all_probs[idx]:.2f}.png")
-            plot_patch_with_masks(img, mask, outpath, meta=meta, label=all_labels[idx], pred=all_preds[idx], prob=all_probs[idx])
+    # ------------------------------------------------
+    # IMAGE SAVING CODE (currently commented out)
+    # ------------------------------------------------
 
-    save_examples(idx_conf_pos, "confident_lesion")
-    save_examples(idx_conf_neg, "confident_nonlesion")
-    save_examples(idx_uncertain, "uncertain")
+    # def plot_patch_with_masks(img, mask, outpath, meta=None, label=None, pred=None, prob=None):
+    #     import matplotlib.pyplot as plt
+    #     plt.figure(figsize=(4, 4))
+    #     plt.imshow(img, cmap='gray', interpolation='none')
+    #     legend_handles = []
+    #     mask_kidney = (mask == 1)
+    #     mask_tumor  = (mask == 2)
+    #     mask_cyst   = (mask == 3)
+    #     if mask_kidney.any():
+    #         plt.imshow(mask_kidney, alpha=0.5, cmap="Blues", interpolation='none')
+    #         legend_handles.append(plt.Rectangle((0,0),1,1, color=plt.get_cmap("Blues")(0.6)))
+    #     if mask_tumor.any():
+    #         plt.imshow(mask_tumor, alpha=0.5, cmap="Reds", interpolation='none')
+    #         legend_handles.append(plt.Rectangle((0,0),1,1, color=plt.get_cmap("Reds")(0.6)))
+    #     if mask_cyst.any():
+    #         plt.imshow(mask_cyst, alpha=0.5, cmap="Oranges", interpolation='none')
+    #         legend_handles.append(plt.Rectangle((0,0),1,1, color=plt.get_cmap("Oranges")(0.6)))
+    #     label_names = []
+    #     if mask_kidney.any(): label_names.append("Kidney")
+    #     if mask_tumor.any():  label_names.append("Tumor")
+    #     if mask_cyst.any():   label_names.append("Cyst")
+    #     if legend_handles:
+    #         plt.legend(legend_handles, label_names, fontsize=8, loc='lower right')
+    #     meta_str = "?"
+    #     type_str = "?"
+    #     if isinstance(meta, dict):
+    #         meta_str = meta.get('slice', '?')
+    #         type_str = meta.get('type', '?')
+    #     elif isinstance(meta, str):
+    #         if meta.startswith("{") and meta.endswith("}"):
+    #             try:
+    #                 import ast
+    #                 meta_dict = ast.literal_eval(meta)
+    #                 meta_str = meta_dict.get('slice', '?')
+    #                 type_str = meta_dict.get('type', '?')
+    #             except Exception:
+    #                 pass
+    #         else:
+    #             type_str = meta
+    #     title = f"Slice {meta_str}, Type: {type_str}"
+    #     if label is not None and prob is not None and pred is not None:
+    #         title += f"\nGT: {label}, Pred: {pred}, Prob: {prob:.2f}"
+    #     plt.title(title, fontsize=8)
+    #     plt.axis('off')
+    #     plt.tight_layout()
+    #     plt.savefig(outpath)
+    #     plt.close()
 
-    print(f"Saved metrics, curves, and {args.num_examples*3} example patch images to {qc_dir}")
+    # idx_conf_pos = np.argsort(-all_probs)[:args.num_examples]
+    # idx_conf_neg = np.argsort(all_probs)[:args.num_examples]
+    # idx_uncertain = np.argsort(np.abs(all_probs - 0.5))[:args.num_examples]
+
+    # def save_examples(indices, name):
+    #     for i, idx in enumerate(indices):
+    #         if idx >= len(all_imgs): continue
+    #         img = all_imgs[idx]
+    #         mask = all_masks[idx] if idx < len(all_masks) else np.zeros_like(img)
+    #         meta = all_meta[idx] if idx < len(all_meta) else {}
+    #         outpath = os.path.join(qc_dir, f"{name}_{i}_label{all_labels[idx]}_pred{all_preds[idx]}_prob{all_probs[idx]:.2f}.png")
+    #         plot_patch_with_masks(img, mask, outpath, meta=meta, label=all_labels[idx], pred=all_preds[idx], prob=all_probs[idx])
+
+    # save_examples(idx_conf_pos, "confident_lesion")
+    # save_examples(idx_conf_neg, "confident_nonlesion")
+    # save_examples(idx_uncertain, "uncertain")
+
+    # print(f"Saved metrics, curves, and {args.num_examples*3} example patch images to {qc_dir}")
 
 if __name__ == "__main__":
     main()
