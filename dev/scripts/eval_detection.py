@@ -25,7 +25,7 @@ def main():
     loader = torch.utils.data.DataLoader(dataset, batch_size=64, shuffle=False)
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    model = get_model(pretrained=False).to(device)
+    model = get_model(pretrained=False, dropout=None).to(device)
     checkpoint = torch.load(args.model_path, map_location=device)
     if 'model' in checkpoint:
         model.load_state_dict(checkpoint['model'])
