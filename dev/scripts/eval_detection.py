@@ -54,32 +54,32 @@ def main():
             # File/case info
         # ---- FIX: Ensure metas is always a list ----
         # Some DataLoader configs may give a dict, some a list. We always want a list of dicts/strs.
-        if isinstance(metas, dict):
-            metas = [metas]
-        elif not isinstance(metas, (list, tuple, np.ndarray)):
-            metas = list(metas)
+            if isinstance(metas, dict):
+                metas = [metas]
+            elif not isinstance(metas, (list, tuple, np.ndarray)):
+                metas = list(metas)
 
-        for i in range(len(metas)):
-            meta = metas[i]
-            patch_file = None
-            if isinstance(meta, dict):
-                case = meta.get('case_id', None)
-                slice_num = meta.get('slice', None)
-                patch_type = meta.get('type', None)
-                patch_file = meta.get('patch_file', None)
-            elif isinstance(meta, str) and meta.startswith("{") and meta.endswith("}"):
-                import ast
-                try:
-                    meta_dict = ast.literal_eval(meta)
-                    case = meta_dict.get('case_id', None)
-                    slice_num = meta_dict.get('slice', None)
-                    patch_type = meta_dict.get('type', None)
-                    patch_file = meta_dict.get('patch_file', None)
-                except Exception:
+            for i in range(len(metas)):
+                meta = metas[i]
+                patch_file = None
+                if isinstance(meta, dict):
+                    case = meta.get('case_id', None)
+                    slice_num = meta.get('slice', None)
+                    patch_type = meta.get('type', None)
+                    patch_file = meta.get('patch_file', None)
+                elif isinstance(meta, str) and meta.startswith("{") and meta.endswith("}"):
+                    import ast
+                    try:
+                        meta_dict = ast.literal_eval(meta)
+                        case = meta_dict.get('case_id', None)
+                        slice_num = meta_dict.get('slice', None)
+                        patch_type = meta_dict.get('type', None)
+                        patch_file = meta_dict.get('patch_file', None)
+                    except Exception:
+                        case, slice_num, patch_type, patch_file = None, None, None, None
+                else:
                     case, slice_num, patch_type, patch_file = None, None, None, None
-            else:
-                case, slice_num, patch_type, patch_file = None, None, None, None
-            all_fileinfo.append((case, slice_num, patch_type, patch_file, batch_idx, i))
+                all_fileinfo.append((case, slice_num, patch_type, patch_file, batch_idx, i))
 
 
             # For image saving (keep for future reactivation)
