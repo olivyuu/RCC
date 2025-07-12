@@ -2,65 +2,81 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import random
 
 PROCESSED_DIR = "dev/data/processed/kits23/"
 CSV_PATH = "dev/runs/report_analysis/2025_07_09_15_26_46_evaluation.csv"
 OUT_DIR = "dev/data/qc/discrepancy_cases/"
 os.makedirs(OUT_DIR, exist_ok=True)
 
-def save_case_images(case_id, report_text, random_plane):
-    path = os.path.join(PROCESSED_DIR, f"{case_id}_vol.npz")
-    if not os.path.exists(path):
-        print(f"[WARN] {case_id} not found in processed_dir.")
-        return
+def save_pair(img2d, mask2d, fname_prefix, gt_has_tumor):
+    # Raw
+    fig, ax = plt.subplots(figsize=(6,6))
+    ax.imshow(img2d, cmap='gray')
+    ax.axis('off')
+    plt.savefig(f"{fname_prefix}_raw.png", bbox_inches='tight', pad_inches=0)
+    plt.close(fig)
 
-    data = np.load(path)
-    img = data['image']
-    mask = np.round(data['mask']).astype(np.uint8)
-
-    planes = {
-        'axial': (img.shape[2] // 2, lambda x, sl: x[:, :, sl]),
-        'sagittal': (img.shape[0] // 2, lambda x, sl: x[sl, :, :]),
-        'coronal': (img.shape[1] // 2, lambda x, sl: x[:, sl, :])
-    }
-    sl, slicer = planes[random_plane]
-    img2d = slicer(img, sl)
-    mask2d = slicer(mask, sl)
-
-    # Raw image
-    raw_path = os.path.join(OUT_DIR, f"{case_id}_{random_plane}_raw.png")
-    plt.imsave(raw_path, img2d, cmap='gray')
-
-    # Overlay image
-    plt.figure()
-    plt.imshow(img2d, cmap='gray')
+    # Overlay
+    fig, ax = plt.subplots(figsize=(6,6))
+    ax.imshow(img2d, cmap='gray')
     if np.any(mask2d == 1):
-        plt.imshow((mask2d == 1), cmap='Blues', alpha=0.4)
-    if np.any(mask2d == 2):
-        plt.imshow((mask2d == 2), cmap='Reds', alpha=0.4)
-    plt.axis('off')
-    overlay_path = os.path.join(OUT_DIR, f"{case_id}_{random_plane}_overlay.png")
-    plt.savefig(overlay_path)
-    plt.close()
-    print(f"Saved: {raw_path}, {overlay_path}")
+        ax.imshow((mask2d == 1), cmap='Blues', alpha=0.4)
+    if gt_has_tumor and np.any(mask2d == 2):
+        ax.imshow((mask2d == 2), cmap='Reds', alpha=0.4)
+    ax.axis('off')
+    plt.savefig(f"{fname_prefix}_overlay.png", bbox_inches='tight', pad_inches=0)
+    plt.close(fig)
 
-    # Save report
-    out_txt = os.path.join(OUT_DIR, f"{case_id}_report.txt")
-    with open(out_txt, 'w') as f:
-        f.write(report_text)
+def find_discrepant_slice(mask, orientation, want_tumor_and_kidney, want_kidney_only):
+    axis = {'axial':2, 'sagittal':0, 'coronal':1}[orientation]
+    n_slices = mask.shape[axis]
+    for sl in range(n_slices):
+        mask2d = mask[:, :, sl] if orientation=='axial' else mask[sl, :, :] if orientation=='sagittal' else mask[:, sl, :]
+        if want_tumor_and_kidney:
+            if np.any(mask2d == 1) and np.any(mask2d == 2):
+                return sl
+        if want_kidney_only:
+            if np.any(mask2d == 1) and not np.any(mask2d == 2) and not np.any(mask2d == 3):
+                return sl
+    return None
 
-def main():
-    df = pd.read_csv(CSV_PATH)
-    if len(df) < 10:
-        print(f"Warning: Only {len(df)} examples in discrepancy file.")
-    sample_df = df.sample(n=min(10, len(df)), random_state=42)
+df = pd.read_csv(CSV_PATH)
+df = df[(df['exam_ground_truth'] == df['exam_prediction']) & (df['overall_discrepancy'] == 1)]
 
-    for idx, row in sample_df.iterrows():
+needed_orients = ['axial']*3 + ['sagittal']*3 + ['coronal']*3
+example_idx = 0
+used_cases = set()
+
+for orient in needed_orients:
+    found = False
+    for idx, row in df.iterrows():
         case_id = row['exam']
-        report_text = row['synthetic_report']
-        random_plane = random.choice(['axial', 'sagittal', 'coronal'])
-        save_case_images(case_id, report_text, random_plane)
+        if (case_id, orient) in used_cases:
+            continue
+        gt = row['exam_ground_truth']
+        data_path = os.path.join(PROCESSED_DIR, f"{case_id}_vol.npz")
+        if not os.path.exists(data_path):
+            continue
+        data = np.load(data_path)
+        img, mask = data['image'], np.round(data['mask']).astype(np.uint8)
+        if gt == 1:
+            sl = find_discrepant_slice(mask, orient, want_tumor_and_kidney=True, want_kidney_only=False)
+        else:
+            sl = find_discrepant_slice(mask, orient, want_tumor_and_kidney=False, want_kidney_only=True)
+        if sl is not None:
+            img2d = img[:, :, sl] if orient=='axial' else img[sl, :, :] if orient=='sagittal' else img[:, sl, :]
+            mask2d = mask[:, :, sl] if orient=='axial' else mask[sl, :, :] if orient=='sagittal' else mask[:, sl, :]
+            fname_prefix = os.path.join(OUT_DIR, f"{case_id}_{orient}")
+            save_pair(img2d, mask2d, fname_prefix, gt_has_tumor=(gt==1))
+            # Save report
+            with open(os.path.join(OUT_DIR, f"{case_id}_{orient}_report.txt"), 'w') as f:
+                f.write(row['synthetic_report'])
+            used_cases.add((case_id, orient))
+            print(f"Saved images and report for case {case_id} ({orient})")
+            example_idx += 1
+            found = True
+            break
+    if not found:
+        print(f"No valid example found for orientation: {orient}")
 
-if __name__ == "__main__":
-    main()
+print("Done.")
