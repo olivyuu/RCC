@@ -1,0 +1,3046 @@
+exam,exam_ground_truth,exam_prediction,synthetic_report_seed,synthetic_report,report_prediction,overall_discrepancy
+case_00003,1,0,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,0
+case_00012,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00013,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. This finding requires further evaluation.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI for characterization and staging.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00015,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. Further evaluation with MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend MRI for further characterization.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00016,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00022,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the left upper pole kidney, concerning for renal cell carcinoma. Further evaluation with MRI is recommended.
+- No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Solid enhancing mass in the left upper pole kidney measuring 3.2 cm, concerning for renal cell carcinoma. Recommend MRI for further evaluation.
+- Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00023,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with renal protocol MRI.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00035,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal imaging is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI or dedicated renal protocol CT for characterization.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00040,1,0,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,0
+case_00044,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00047,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol MRI is recommended.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol MRI.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00049,1,0,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,0
+case_00051,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with MRI is recommended.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend MRI for further characterization.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00052,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00057,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00063,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal MRI is recommended.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with renal MRI.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00071,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol imaging or MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol imaging or MRI.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00079,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. This finding requires further evaluation.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI or dedicated renal protocol CT for characterization.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00081,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal MRI is recommended.
+- The left kidney is normal in appearance.
+- No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal MRI.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00083,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00098,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00101,1,0,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+Normal CT of the abdomen and pelvis.",0,0
+case_00107,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00110,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. This finding requires further evaluation.
+- No hydronephrosis or peri-nephric stranding is noted.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI or dedicated renal protocol CT for characterization.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00111,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00112,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. This finding requires further evaluation.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI for better characterization.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00114,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:  
+Chest:  
+- The visualized portions of the lungs are normal in appearance.  
+- The visualized portion of the heart is normal in size without pericardial effusion.  
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.  
+
+Hepatobiliary System:  
+- The liver is normal in size without focal hepatic lesions.  
+- No intrahepatic ductal dilatation is seen.  
+- The hepatic and portal veins are patent.  
+- The gallbladder and common bile duct are normal in appearance.  
+- The pancreas, spleen, and adrenals are normal in appearance.  
+
+Genitourinary System:  
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.  
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.  
+
+Gastrointestinal System:  
+- The colon is normal in appearance and without wall thickening or inflammatory change.  
+
+Other:  
+- No intraperitoneal free air or fluid is visualized.  
+- No pathologic lymphadenopathy is seen.  
+
+There are no osseous or soft tissue abnormalities.  
+
+Impression:  
+Normal CT of the abdomen and pelvis.",0,1
+case_00116,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00119,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol MRI is recommended.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend dedicated renal protocol MRI for further evaluation.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00125,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00135,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00136,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00140,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00142,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00148,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend MRI for further characterization and evaluation.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00150,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00172,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00174,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00176,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol CT or MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol CT or MRI.
+- Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00181,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. This finding requires further evaluation.
+- The left kidney is normal in appearance without hydronephrosis or peri-nephric stranding.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI or dedicated renal protocol CT for characterization.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00183,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with renal protocol MRI.
+- Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00185,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00186,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal MRI is recommended.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend dedicated renal MRI for further evaluation.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00189,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol imaging is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol CT or MRI.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00193,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00194,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right lower pole kidney, concerning for renal cell carcinoma. This finding requires further evaluation.
+- The contralateral kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the right lower pole kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI for characterization and staging.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00214,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00216,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00229,1,0,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal imaging or MRI is recommended.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI or dedicated renal imaging.
+2. Otherwise normal CT of the abdomen and pelvis.",1,1
+case_00232,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI for characterization.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00235,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. This finding requires further evaluation.
+- No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI for characterization and staging.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00258,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol imaging or MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol imaging or MRI.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00274,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00279,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the left kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol CT or MRI is recommended.
+- The right kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- A 3.2 cm solid enhancing mass in the lower pole of the left kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol CT or MRI.
+- Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00282,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal MRI.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00287,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. This finding requires further evaluation.
+- No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI or dedicated renal ultrasound for characterization.",1,0
+case_00295,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right lower pole of the kidney, concerning for renal cell carcinoma. Further evaluation with dedicated renal imaging is recommended.
+- The left kidney is normal in appearance without hydronephrosis or peri-nephric stranding.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the right lower pole of the kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal MRI or ultrasound for characterization.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00401,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00402,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol CT or MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol CT or MRI.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00408,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00409,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00416,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+Normal CT of the abdomen and pelvis.",0,1
+case_00421,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00425,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:  
+Chest:  
+- The visualized portions of the lungs are normal in appearance.  
+- The visualized portion of the heart is normal in size without pericardial effusion.  
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.  
+
+Hepatobiliary System:  
+- The liver is normal in size without focal hepatic lesions.  
+- No intrahepatic ductal dilatation is seen.  
+- The hepatic and portal veins are patent.  
+- The gallbladder and common bile duct are normal in appearance.  
+- The pancreas, spleen, and adrenals are normal in appearance.  
+
+Genitourinary System:  
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. This requires further evaluation.  
+- The left kidney is normal in appearance.  
+- No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.  
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.  
+
+Gastrointestinal System:  
+- The colon is normal in appearance and without wall thickening or inflammatory change.  
+
+Other:  
+- No intraperitoneal free air or fluid is visualized.  
+- No pathologic lymphadenopathy is seen.  
+
+There are no osseous or soft tissue abnormalities.  
+
+Impression:  
+- A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI or dedicated renal protocol CT for characterization.",1,0
+case_00427,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+Normal CT of the abdomen and pelvis.",0,1
+case_00431,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. This finding requires further evaluation.
+- No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI for characterization and staging.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00432,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00438,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol CT or MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol CT or MRI.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00443,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00446,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00449,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00457,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol MRI is recommended.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with renal protocol MRI.
+- Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00459,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00460,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right lower pole of the kidney, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol imaging or MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- A 3.2 cm solid enhancing mass in the right lower pole of the kidney, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol imaging or MRI is recommended.
+- Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00466,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol MRI is recommended.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol MRI.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00473,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol CT or MRI is recommended.
+- The left kidney is normal in appearance.
+- No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol CT or MRI.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00477,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol CT or MRI is recommended.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol CT or MRI.
+- Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00479,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. This finding requires further evaluation.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI or dedicated renal protocol CT for characterization.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00488,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. This finding requires further evaluation.
+- The left kidney is normal in appearance.
+- No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI for better characterization.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00490,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00495,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00512,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. This requires further evaluation.
+- No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI or dedicated renal protocol CT for characterization.",1,0
+case_00513,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:  
+Chest:  
+- The visualized portions of the lungs are normal in appearance.  
+- The visualized portion of the heart is normal in size without pericardial effusion.  
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.  
+
+Hepatobiliary System:  
+- The liver is normal in size without focal hepatic lesions.  
+- No intrahepatic ductal dilatation is seen.  
+- The hepatic and portal veins are patent.  
+- The gallbladder and common bile duct are normal in appearance.  
+- The pancreas, spleen, and adrenals are normal in appearance.  
+
+Genitourinary System:  
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal MRI is recommended.  
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.  
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.  
+
+Gastrointestinal System:  
+- The colon is normal in appearance and without wall thickening or inflammatory change.  
+
+Other:  
+- No intraperitoneal free air or fluid is visualized.  
+- No pathologic lymphadenopathy is seen.  
+
+There are no osseous or soft tissue abnormalities.  
+
+Impression:  
+- A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with renal MRI.  
+- Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00514,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00522,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00533,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with renal protocol MRI.
+- Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00536,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal MRI.
+- Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00543,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol imaging or MRI is recommended.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol imaging or MRI.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00545,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol imaging or MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol CT or MRI.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00553,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the left upper pole kidney, concerning for renal cell carcinoma. This finding requires further evaluation.
+- No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- A 3.2 cm solid enhancing mass in the left upper pole kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI or dedicated renal protocol CT for characterization.",1,0
+case_00556,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol MRI is recommended.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol MRI.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00559,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with renal protocol MRI.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00567,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. This finding requires further evaluation.
+- No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI or dedicated renal protocol CT for characterization.",1,0
+case_00569,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00572,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the upper pole, concerning for renal cell carcinoma. This finding requires further evaluation.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the upper pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with MRI or dedicated renal protocol CT for characterization.
+2. Otherwise, normal CT of the abdomen and pelvis.",1,0
+case_00575,1,1,NEGATIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- The kidneys are normal in appearance. No hydronephrosis, peri-nephric stranding, or radio-opaque calculi are visualized.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+- Normal CT of the abdomen and pelvis.",0,1
+case_00579,1,1,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the lower pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol CT or MRI is recommended.
+- The left kidney is normal in appearance without hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the lower pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol CT or MRI.
+2. Otherwise normal CT of the abdomen and pelvis.",1,0
+case_00585,1,0,POSITIVE,"EXAM: CT Abdomen and Pelvis with Contrast
+
+Findings:
+Chest:
+- The visualized portions of the lungs are normal in appearance.
+- The visualized portion of the heart is normal in size without pericardial effusion.
+- The abdominal aorta demonstrates no evidence of focal aneurysmal dilatation or dissection.
+
+Hepatobiliary System:
+- The liver is normal in size without focal hepatic lesions.
+- No intrahepatic ductal dilatation is seen.
+- The hepatic and portal veins are patent.
+- The gallbladder and common bile duct are normal in appearance.
+- The pancreas, spleen, and adrenals are normal in appearance.
+
+Genitourinary System:
+- A solid enhancing mass measuring 3.2 cm is identified in the right kidney, located in the mid pole, concerning for renal cell carcinoma. Further evaluation with dedicated renal protocol MRI is recommended.
+- The left kidney is normal in appearance without evidence of hydronephrosis or calculi.
+- The urinary bladder, prostate/uterus, and adnexa are within normal limits.
+
+Gastrointestinal System:
+- The colon is normal in appearance and without wall thickening or inflammatory change.
+
+Other:
+- No intraperitoneal free air or fluid is visualized.
+- No pathologic lymphadenopathy is seen.
+
+There are no osseous or soft tissue abnormalities.
+
+Impression:
+1. A 3.2 cm solid enhancing mass in the mid pole of the right kidney, concerning for renal cell carcinoma. Recommend further evaluation with dedicated renal protocol MRI.
+2. Otherwise normal CT of the abdomen and pelvis.",1,1
