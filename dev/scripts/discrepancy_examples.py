@@ -2,13 +2,14 @@ import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import random
 
 PROCESSED_DIR = "dev/data/processed/kits23/"
 CSV_PATH = "dev/runs/report_analysis/2025_07_09_15_26_46_evaluation.csv"
 OUT_DIR = "dev/data/qc/discrepancy_cases/"
 os.makedirs(OUT_DIR, exist_ok=True)
 
-def save_case_image_and_report(case_id, model_says_tumor, report_text):
+def save_case_images(case_id, report_text, random_plane):
     path = os.path.join(PROCESSED_DIR, f"{case_id}_vol.npz")
     if not os.path.exists(path):
         print(f"[WARN] {case_id} not found in processed_dir.")
@@ -18,58 +19,48 @@ def save_case_image_and_report(case_id, model_says_tumor, report_text):
     img = data['image']
     mask = np.round(data['mask']).astype(np.uint8)
 
-    # Choose a slice: if model_says_tumor, show a tumor slice; otherwise, show a mid kidney slice
-    if model_says_tumor and np.any(mask == 2):
-        # Use the first tumor slice
-        tumor_slices = np.unique(np.argwhere(mask == 2)[:, 2])
-        sl = int(tumor_slices[0]) if len(tumor_slices) > 0 else img.shape[2] // 2
-    else:
-        # Show a mid kidney slice (with kidney, no tumor)
-        kidney_slices = np.unique(np.argwhere(mask == 1)[:, 2])
-        sl = int(kidney_slices[len(kidney_slices)//2]) if len(kidney_slices) > 0 else img.shape[2] // 2
+    planes = {
+        'axial': (img.shape[2] // 2, lambda x, sl: x[:, :, sl]),
+        'sagittal': (img.shape[0] // 2, lambda x, sl: x[sl, :, :]),
+        'coronal': (img.shape[1] // 2, lambda x, sl: x[:, sl, :])
+    }
+    sl, slicer = planes[random_plane]
+    img2d = slicer(img, sl)
+    mask2d = slicer(mask, sl)
 
-    kidney = (mask[:,:,sl] == 1).astype(float)
-    tumor = (mask[:,:,sl] == 2).astype(float)
+    # Raw image
+    raw_path = os.path.join(OUT_DIR, f"{case_id}_{random_plane}_raw.png")
+    plt.imsave(raw_path, img2d, cmap='gray')
 
+    # Overlay image
     plt.figure()
-    plt.imshow(img[:,:,sl], cmap='gray')
-    plt.imshow(kidney, cmap='Blues', alpha=0.4)
-    if tumor.any():
-        plt.imshow(tumor, cmap='Reds', alpha=0.4)
-    plt.title(f"{case_id} Slice {sl}")
+    plt.imshow(img2d, cmap='gray')
+    if np.any(mask2d == 1):
+        plt.imshow((mask2d == 1), cmap='Blues', alpha=0.4)
+    if np.any(mask2d == 2):
+        plt.imshow((mask2d == 2), cmap='Reds', alpha=0.4)
     plt.axis('off')
-    out_img = os.path.join(OUT_DIR, f"{case_id}_slice{sl}.png")
-    plt.savefig(out_img)
+    overlay_path = os.path.join(OUT_DIR, f"{case_id}_{random_plane}_overlay.png")
+    plt.savefig(overlay_path)
     plt.close()
-    print(f"Saved: {out_img}")
+    print(f"Saved: {raw_path}, {overlay_path}")
 
+    # Save report
     out_txt = os.path.join(OUT_DIR, f"{case_id}_report.txt")
     with open(out_txt, 'w') as f:
         f.write(report_text)
-    print(f"Saved: {out_txt}")
 
 def main():
     df = pd.read_csv(CSV_PATH)
+    if len(df) < 10:
+        print(f"Warning: Only {len(df)} examples in discrepancy file.")
+    sample_df = df.sample(n=min(10, len(df)), random_state=42)
 
-    # Type A: Report says NO tumor, model says YES tumor
-    a_row = df[(df['report_prediction'] == 0) & (df['exam_prediction'] == 1)]
-    if not a_row.empty:
-        row = a_row.iloc[0]
+    for idx, row in sample_df.iterrows():
         case_id = row['exam']
         report_text = row['synthetic_report']
-        save_case_image_and_report(case_id, model_says_tumor=True, report_text=report_text)
-    else:
-        print("[INFO] No cases where report missed tumor but model found tumor.")
-
-    # Type B: Report says YES tumor, model says NO tumor
-    b_row = df[(df['report_prediction'] == 1) & (df['exam_prediction'] == 0)]
-    if not b_row.empty:
-        row = b_row.iloc[0]
-        case_id = row['exam']
-        report_text = row['synthetic_report']
-        save_case_image_and_report(case_id, model_says_tumor=False, report_text=report_text)
-    else:
-        print("[INFO] No cases where report called tumor but model said no tumor.")
+        random_plane = random.choice(['axial', 'sagittal', 'coronal'])
+        save_case_images(case_id, report_text, random_plane)
 
 if __name__ == "__main__":
     main()
