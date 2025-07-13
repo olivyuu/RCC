@@ -33,72 +33,106 @@ def save_matched_pair(img2d, mask2d, fname_prefix, include_tumor):
     else:
         print(f"Saved overlay image (no mask present in this slice): {fname_prefix}_overlay.png")
 
-def find_slice(mask, orientation, require_tumor_and_kidney=False, require_kidney_only=False):
-    # orientation: 'axial', 'sagittal', or 'coronal'
-    # Returns: slice idx (int) or None
+def best_slice(mask, orientation, kidney_and_tumor=False, kidney_only=False):
     axis = {'axial':2, 'sagittal':0, 'coronal':1}[orientation]
     n_slices = mask.shape[axis]
+    best_idx = None
+    best_val = -1
     for sl in range(n_slices):
         mask2d = mask[:, :, sl] if orientation=='axial' else mask[sl, :, :] if orientation=='sagittal' else mask[:, sl, :]
-        if require_tumor_and_kidney:
-            if np.any(mask2d == 1) and np.any(mask2d == 2):
-                return sl
-        if require_kidney_only:
-            if np.any(mask2d == 1) and not np.any(mask2d == 2) and not np.any(mask2d == 3):
-                return sl
-    return None
+        if kidney_and_tumor:
+            kidney = (mask2d == 1)
+            tumor = (mask2d == 2)
+            if kidney.any() and tumor.any():
+                val = kidney.sum() + tumor.sum()
+                if val > best_val:
+                    best_val = val
+                    best_idx = sl
+        elif kidney_only:
+            kidney = (mask2d == 1)
+            tumor = (mask2d == 2)
+            cyst  = (mask2d == 3)
+            if kidney.any() and not tumor.any() and not cyst.any():
+                val = kidney.sum()
+                if val > best_val:
+                    best_val = val
+                    best_idx = sl
+    return best_idx
 
 # ----------- Find case and slices for kidney+tumor -----------
 case1_found = False
-print("Searching for case with kidney+tumor slices...")
+case1_id = None
+case1_slices = {}
+print("Searching for case with kidney+tumor slices (best per orientation)...")
 for f in sorted(os.listdir(PROCESSED_DIR)):
     if not f.endswith("_vol.npz"):
         continue
     case_id = f.split("_vol.npz")[0]
     data = np.load(os.path.join(PROCESSED_DIR, f))
-    img, mask = data['image'], np.round(data['mask']).astype(np.uint8)
-    found_all = True
+    mask = np.round(data['mask']).astype(np.uint8)
+    # Ensure at least one slice in every orientation has both kidney & tumor
+    valid = True
     slices = {}
     for orient in ['axial', 'sagittal', 'coronal']:
-        sl = find_slice(mask, orient, require_tumor_and_kidney=True)
+        sl = best_slice(mask, orient, kidney_and_tumor=True)
         if sl is None:
-            found_all = False
+            valid = False
             break
         slices[orient] = sl
-    if found_all:
-        print(f"\n[INFO] Selected {case_id} for 'kidney_and_tumor' example")
-        for orient in ['axial', 'sagittal', 'coronal']:
-            sl = slices[orient]
-            img2d = img[:, :, sl] if orient == 'axial' else img[sl, :, :] if orient == 'sagittal' else img[:, sl, :]
-            mask2d = mask[:, :, sl] if orient == 'axial' else mask[sl, :, :] if orient == 'sagittal' else mask[:, sl, :]
-            fname_prefix = os.path.join(QC_DIR, f"{case_id}_kidney_and_tumor_{orient}")
-            save_matched_pair(img2d, mask2d, fname_prefix, include_tumor=True)
+    if valid:
         case1_found = True
+        case1_id = case_id
+        case1_slices = slices
         break
 
-# ----------- Find kidney-only slices (may be in same or any other case) -----------
+# ----------- Find case and slices for kidney-only -----------
 case2_found = False
-print("Searching for slices with kidney only (no tumor)...")
+case2_id = None
+case2_slices = {}
+print("Searching for a different case with kidney-only slices (best per orientation)...")
 for f in sorted(os.listdir(PROCESSED_DIR)):
     if not f.endswith("_vol.npz"):
         continue
     case_id = f.split("_vol.npz")[0]
+    if case_id == case1_id:
+        continue
     data = np.load(os.path.join(PROCESSED_DIR, f))
-    img, mask = data['image'], np.round(data['mask']).astype(np.uint8)
-    found = 0
+    mask = np.round(data['mask']).astype(np.uint8)
+    valid = True
+    slices = {}
     for orient in ['axial', 'sagittal', 'coronal']:
-        sl = find_slice(mask, orient, require_kidney_only=True)
-        if sl is not None:
-            img2d = img[:, :, sl] if orient == 'axial' else img[sl, :, :] if orient == 'sagittal' else img[:, sl, :]
-            mask2d = mask[:, :, sl] if orient == 'axial' else mask[sl, :, :] if orient == 'sagittal' else mask[:, sl, :]
-            fname_prefix = os.path.join(QC_DIR, f"{case_id}_kidney_only_{orient}")
-            save_matched_pair(img2d, mask2d, fname_prefix, include_tumor=False)
-            found += 1
-        if found == 3:
-            print(f"[INFO] Selected {case_id} for kidney-only slices in all orientations.")
-            case2_found = True
+        sl = best_slice(mask, orient, kidney_only=True)
+        if sl is None:
+            valid = False
             break
-    if case2_found:
+        slices[orient] = sl
+    if valid:
+        case2_found = True
+        case2_id = case_id
+        case2_slices = slices
         break
+
+# Output 6 images per case (3 overlays, 3 raw) for each case
+if case1_found:
+    data = np.load(os.path.join(PROCESSED_DIR, f"{case1_id}_vol.npz"))
+    img, mask = data['image'], np.round(data['mask']).astype(np.uint8)
+    print(f"\n[INFO] Selected {case1_id} for 'kidney_and_tumor' example")
+    for orient in ['axial', 'sagittal', 'coronal']:
+        sl = case1_slices[orient]
+        img2d = img[:, :, sl] if orient=='axial' else img[sl, :, :] if orient=='sagittal' else img[:, sl, :]
+        mask2d = mask[:, :, sl] if orient=='axial' else mask[sl, :, :] if orient=='sagittal' else mask[:, sl, :]
+        fname_prefix = os.path.join(QC_DIR, f"{case1_id}_kidney_and_tumor_{orient}")
+        save_matched_pair(img2d, mask2d, fname_prefix, include_tumor=True)
+
+if case2_found:
+    data = np.load(os.path.join(PROCESSED_DIR, f"{case2_id}_vol.npz"))
+    img, mask = data['image'], np.round(data['mask']).astype(np.uint8)
+    print(f"\n[INFO] Selected {case2_id} for 'kidney_only' example")
+    for orient in ['axial', 'sagittal', 'coronal']:
+        sl = case2_slices[orient]
+        img2d = img[:, :, sl] if orient=='axial' else img[sl, :, :] if orient=='sagittal' else img[:, sl, :]
+        mask2d = mask[:, :, sl] if orient=='axial' else mask[sl, :, :] if orient=='sagittal' else mask[:, sl, :]
+        fname_prefix = os.path.join(QC_DIR, f"{case2_id}_kidney_only_{orient}")
+        save_matched_pair(img2d, mask2d, fname_prefix, include_tumor=False)
 
 print("Done.")
