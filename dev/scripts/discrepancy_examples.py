@@ -54,7 +54,7 @@ def best_slice(mask, orientation, kidney_and_tumor=False, kidney_only=False):
     return best_idx
 
 df = pd.read_csv(CSV_PATH)
-df = df[(df['exam_ground_truth'] == df['exam_prediction']) & (df['overall_discrepancy'] == 1)]
+df = df[(df['exam_ground_truth'] == df['exam_prediction']) & (df['exam_ground_truth'] == 1)]
 
 for _, row in df.iterrows():
     case_id = row['exam']
@@ -65,12 +65,9 @@ for _, row in df.iterrows():
     data = np.load(data_path)
     img, mask = data['image'], np.round(data['mask']).astype(np.uint8)
     for orient in ['axial', 'sagittal', 'coronal']:
-        if gt == 1:
-            sl = best_slice(mask, orient, kidney_and_tumor=True)
-            include_tumor = True
-        else:
-            sl = best_slice(mask, orient, kidney_only=True)
-            include_tumor = False
+        # Always select kidney+tumor images since gt==1 for all cases now
+        sl = best_slice(mask, orient, kidney_and_tumor=True)
+        include_tumor = True
         if sl is not None:
             img2d = img[:, :, sl] if orient=='axial' else img[sl, :, :] if orient=='sagittal' else img[:, sl, :]
             mask2d = mask[:, :, sl] if orient=='axial' else mask[sl, :, :] if orient=='sagittal' else mask[:, sl, :]
